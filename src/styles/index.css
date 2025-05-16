@@ -1,0 +1,130 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@700&family=Poppins:wght@400;500;600;700&display=swap');
+@import './variables.css';
+
+/* ==== Typography Examples ==== */
+
+.title {
+  font-family: var(--font-inter);
+  font-weight: var(--fw-700);
+  font-size: var(--fs-30);
+  color: var(--text-black);
+  text-align: center;
+}
+
+.text-normal {
+  font-family: var(--font-poppins);
+  font-weight: var(--fw-400);
+  font-size: var(--fs-20);
+  color: var(--text-black);
+  text-align: center;
+}
+
+/* ==== Reset & Base Styles ==== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-poppins);
+  background: var(--bg-main);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-attachment: fixed;
+  color: var(--text-white);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.5;
+  min-height: 100vh;
+}
+
+ul,
+ol {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  font: inherit;
+  color: inherit;
+  padding: 0;
+}
+
+input,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+  outline: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/* ==== Layout Helpers ==== */
+
+.layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+.layout-main {
+  flex: 1;
+  padding: 24px;
+}
+
+/* ==== Utility ==== */
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  clip: rect(0 0 0 0);
+  overflow: hidden;
+}
+
+/* Default (desktop) */
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 24px 24px;
+  width: 100%;
+}
+
+/* Планшет: 768px і нижче */
+@media screen and (max-width: 768px) {
+  .container {
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+}
+
+/* Мобілка: до 767px */
+@media screen and (max-width: 767px) {
+  .container {
+    padding: 24px 16px 16px;
+  }
+}

@@ -1,0 +1,29 @@
+:root {
+    /* === BACKGROUNDS === */
+    --bg-main: linear-gradient(180deg, #294045 0%, #1e2f33 100%);
+    --bg-081222: #081222;
+    --bg-0b602f: #0b602f;
+    --bg-508f8c: #508f8c;
+    --bg-dfad3f: #dfad3f;
+    --bg-gradient-355359: linear-gradient(180deg, #355359 0%, #3b5d63 100%);
+    --bg-b20202: #b20202;
+    --bg-f23a3a: #f23a3a;
+
+    /* === TEXT COLORS === */
+    --text-white: #fcfcfc;
+    --text-black: #000000;
+
+    /* === FONT FAMILIES === */
+    --font-inter: 'Inter', sans-serif;
+    --font-poppins: 'Poppins', sans-serif;
+
+    /* === FONT SIZES === */
+    --fs-30: 30px;
+    --fs-20: 20px;
+
+    /* === FONT WEIGHTS === */
+    --fw-400: 400;
+    --fw-500: 500;
+    --fw-600: 600;
+    --fw-700: 700;
+}
