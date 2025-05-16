@@ -1,9 +1,15 @@
-import React from 'react'
+import React, { Suspense } from 'react'
+import Header from './Header/Header'
+import Sidebar from './Sidebar/Sidebar'
 
-const UserAcountLayout = () => {
+const UserAcountLayout = ({children}) => {
   return (
-    <div>UserAcountLayout</div>
-  )
+    <>
+      <Header />
+      <Sidebar />
+      <Suspense fallback={null}>{children}</Suspense>
+    </>
+  );
 }
 
 export default UserAcountLayout
