@@ -5,12 +5,10 @@ import PrivateRoute from './components/PrivateRoute';
 import RestrictedRoute from './components/RestrictedRoute';
 
 // Сторінки
-import HomeTab from './pages/HomeTab/HomeTab';
-import StatisticsTab from './pages/StatisticsTab/StatisticsTab';
-import CurrencyTab from './pages/CurrencyTab/CurrencyTab';
 import LoginPage from './pages/LoginPage/LoginPage';
 import RegistrationPage from './pages/RegistrationPage/RegistrationPage';
 import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
+import DashboardPage from './pages/DashboardPage/DashboardPage';
 
 const App = () => {
   return (
@@ -18,16 +16,8 @@ const App = () => {
       <Toaster position="top-right" reverseOrder={false} />
       <Routes>
         <Route
-          path="/"
-          element={<PrivateRoute component={HomeTab} redirectTo="/login" />}
-        />
-        <Route
-          path="/statistics"
-          element={<PrivateRoute component={StatisticsTab} redirectTo="/login" />}
-        />
-        <Route
-          path="/currency"
-          element={<PrivateRoute component={CurrencyTab} redirectTo="/login" />}
+          path="/*"
+          element={<PrivateRoute component={DashboardPage} redirectTo="/login" />}
         />
         <Route
           path="/register"
