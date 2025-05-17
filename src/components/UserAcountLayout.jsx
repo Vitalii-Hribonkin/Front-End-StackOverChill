@@ -8,15 +8,17 @@ const UserAcountLayout = ({ children }) => {
   return (
     <>
       <Header />
-      <Sidebar />
-      <Suspense fallback={null}>
-        {
-          <>
-            {children}
-            <Outlet />
-          </>
-        }
-      </Suspense>
+      <div className='container'>
+        <Sidebar />
+        <Suspense fallback={null}>
+          {
+            <>
+              {children}
+              <Outlet />
+            </>
+          }
+        </Suspense>
+      </div>
     </>
   );
 }

@@ -25,13 +25,18 @@ const authPersistConfig = {
   whitelist: ['token'], // зберігати тільки токен
 };
 
+const currencyPersistConfig = {
+  key: 'currency',
+  storage,
+  whitelist: ['data', 'time'], 
+};
 // Обʼєднання всіх редʼюсерів
 const rootReducer = combineReducers({
   auth: persistReducer(authPersistConfig, authReducer),
   user: userReducer,
   transactions: transactionsReducer,
   statistics: statisticsReducer,
-  currency: currencyReducer,
+  currency: persistReducer(currencyPersistConfig, currencyReducer),
 });
 
 // Створення store
