@@ -1,0 +1,41 @@
+.balance {
+  margin-top: 27px;
+  padding: 24px 16px;
+  background: var(--bg-gradient-355359);
+  border-radius: 16px;
+}
+
+.title {
+  font-size: 12px;
+  text-transform: uppercase;
+  color: var(--text-white);
+  opacity: 0.4;
+  margin-bottom: 18px;
+}
+
+.amount {
+  font-size: 30px;
+  color: var(--text-white);
+}
+
+@media screen and (min-width: 768px) {
+  .balance {
+    margin-top: 24px;
+    padding: 38px 16px;
+    height: 143px;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .balance {
+    margin-top: 0;
+    padding: 24px 37px;
+    height: unset;
+    background: transparent;
+    border-radius: unset;
+  }
+
+  .title {
+  margin-bottom: 12px;
+}
+}

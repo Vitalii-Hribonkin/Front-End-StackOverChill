@@ -1,0 +1,98 @@
+.container {
+  border-radius: 16px;
+  padding: 16px;
+  width: 288px;
+  height: 390px;
+  background-image: url(../../assets/images/hello-1x.png),
+    var(--bg-gradient-355359);
+  background-repeat: no-repeat;
+  background-position: center 184px, center center;
+  @media (min-resolution: 192dpi) {
+    background-image: url(../../assets/images/hello-2x.png),
+      var(--bg-gradient-355359);
+    background-size: 234px 174px, cover;
+  }
+}
+
+.exchangeTable {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--text-white);
+}
+
+th {
+  background: linear-gradient(180deg, #294045 0%, #1e2f33 100%);
+  padding: 16px 12px;
+  border: none;
+  font-weight: 600;
+  text-align: center;
+}
+
+.thLeft {
+  text-align: left;
+  border-top-left-radius: 12px;
+  border-bottom-left-radius: 12px;
+}
+
+.thRight {
+  text-align: right;
+  border-top-right-radius: 12px;
+  border-bottom-right-radius: 12px;
+}
+
+td {
+  padding: 16px 12px;
+  text-align: center;
+  border: none;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.error {
+  transform: translateY(30px);
+  font-size: 36px;
+  text-align: center;
+}
+
+@media screen and (min-width: 768px) {
+  .container {
+    width: 336px;
+    height: 310px;
+    background-position: center 159px, center center;
+    background-size: 181px 135px, cover;
+  }
+
+  .exchangeTable {
+    font-size: 16px;
+  }
+
+  .thLeft {
+    padding-left: 32px;
+  }
+
+  .thRight {
+    padding-right: 32px;
+  }
+
+  td {
+    padding: 16px 26px;
+    font-size: 16px;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .container {
+    padding: 0 24px;
+    min-width: 100%;
+    min-height: 362px;
+    background-image: url(../../assets/images/hello-1x.png);
+    background-position: center 155px, center center;
+    background-size: 222px 166px, cover;
+    @media (min-resolution: 192dpi) {
+      background-image: url(../../assets/images/hello-2x.png);
+    }
+  }
+}

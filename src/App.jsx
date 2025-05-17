@@ -1,6 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import { lazy } from 'react';
+import { useMediaQuery } from 'react-responsive';
 
 import PrivateRoute from './components/PrivateRoute';
 import RestrictedRoute from './components/RestrictedRoute';
@@ -18,6 +19,10 @@ const CurrencyTab = lazy(() => import('./pages/CurrencyTab/CurrencyTab'));
 
 
 const App = () => {
+ const isTab = useMediaQuery({
+   query: '(min-width: 768px)',
+ });
+
   return (
     <>
       <Toaster position='top-right' reverseOrder={false} />
@@ -30,7 +35,7 @@ const App = () => {
         >
           <Route index element={<HomeTab />} />
           <Route path='statistics' element={<StatisticsTab />} />
-          <Route path='currency' element={<CurrencyTab />} />
+          {!isTab && <Route path='currency' element={<CurrencyTab />} />}
         </Route>
         <Route
           path='/register'
