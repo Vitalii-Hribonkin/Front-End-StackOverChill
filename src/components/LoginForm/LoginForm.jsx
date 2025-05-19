@@ -19,7 +19,8 @@ const LoginForm = () => {
   const validSchema = Yup.object().shape({
     email: Yup.string()
       .required('The field cannot be empty')
-      .max(64, 'Maximum 64 characters'),
+      .max(64, 'Maximum 64 characters')
+      .email(),
     password: Yup.string()
       .required('The field cannot be empty')
       .min(8, 'Minimum 8 characters')
@@ -48,7 +49,7 @@ const LoginForm = () => {
           onSubmit={handleSubmit}
           validationSchema={validSchema}
         >
-          <Form className={s.form}>
+          <Form noValidate className={s.form}>
             <div className={s.inputsWrap}>
               {/*  */}
 
