@@ -85,6 +85,16 @@
   color: #b20202;
 }
 
+.inputError {
+  border-color: #b20202 !important;
+}
+.iconError {
+  fill: #b20202 !important;
+}
+.inputError::placeholder {
+  color: #b20202 !important;
+}
+
 .btnWrap {
   display: flex;
   flex-direction: column;

@@ -52,7 +52,7 @@ const LoginForm = () => {
             <div className={s.inputsWrap}>
               {/*  */}
 
-              <div className={s.inputIconWrap}>
+              {/* <div className={s.inputIconWrap}>
                 <svg className={s.icon} width={24} height={24}>
                   <use href="../../../public/icons.svg#mail"></use>
                 </svg>
@@ -67,9 +67,42 @@ const LoginForm = () => {
                   component="p"
                   name="email"
                 />
-              </div>
+                          </div> */}
 
-              <div className={s.inputIconWrap}>
+              <Field name="email">
+                {({ field, meta }) => (
+                  <div
+                    className={`${s.inputIconWrap} ${
+                      meta.touched && meta.error ? s.errorWrap : ''
+                    }`}
+                  >
+                    <svg
+                      className={`${s.icon} ${
+                        meta.touched && meta.error ? s.iconError : ''
+                      }`}
+                      width={24}
+                      height={24}
+                    >
+                      <use href="../../../public/icons.svg#mail"></use>
+                    </svg>
+
+                    <input
+                      {...field}
+                      type="email"
+                      placeholder="E-mail"
+                      className={`${s.input} ${
+                        meta.touched && meta.error ? s.inputError : ''
+                      }`}
+                    />
+
+                    {meta.touched && meta.error && (
+                      <p className={s.errorMes}>{meta.error}</p>
+                    )}
+                  </div>
+                )}
+              </Field>
+
+              {/* <div className={s.inputIconWrap}>
                 <svg className={s.icon} width={24} height={24}>
                   <use href="../../../public/icons.svg#lock"></use>
                 </svg>
@@ -84,7 +117,40 @@ const LoginForm = () => {
                   component="p"
                   name="password"
                 />
-              </div>
+              </div> */}
+
+              <Field name="password">
+                {({ field, meta }) => (
+                  <div
+                    className={`${s.inputIconWrap} ${
+                      meta.touched && meta.error ? s.errorWrap : ''
+                    }`}
+                  >
+                    <svg
+                      className={`${s.icon} ${
+                        meta.touched && meta.error ? s.iconError : ''
+                      }`}
+                      width={24}
+                      height={24}
+                    >
+                      <use href="../../../public/icons.svg#lock"></use>
+                    </svg>
+
+                    <input
+                      {...field}
+                      type="password"
+                      placeholder="Password"
+                      className={`${s.input} ${
+                        meta.touched && meta.error ? s.inputError : ''
+                      }`}
+                    />
+
+                    {meta.touched && meta.error && (
+                      <p className={s.errorMes}>{meta.error}</p>
+                    )}
+                  </div>
+                )}
+              </Field>
             </div>
 
             <div className={s.btnWrap}>
