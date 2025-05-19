@@ -14,7 +14,6 @@ import UserAcountLayout from './components/UserAcountLayout';
 import { useDispatch } from 'react-redux';
 import { refreshUser } from './redux/auth/authOperations';
 
-
 const HomeTab = lazy(() => import('./pages/HomeTab/HomeTab'));
 const StatisticsTab = lazy(() => import('./pages/StatisticsTab/StatisticsTab'));
 const CurrencyTab = lazy(() => import('./pages/CurrencyTab/CurrencyTab'));
@@ -27,33 +26,28 @@ const App = () => {
 
   useEffect(() => {
     dispatch(refreshUser());
-  }, []);
+  }, [dispatch]);
 
   return (
     <>
       <Toaster position='top-right' reverseOrder={false} />
       <Routes>
-        <Route
-          path='/'
-          element={
-            <PrivateRoute component={UserAcountLayout} redirectTo='/login' />
-          }
-        >
-          <Route index element={<HomeTab />} />
-          <Route path='statistics' element={<StatisticsTab />} />
-          {!isTab && <Route path='currency' element={<CurrencyTab />} />}
+        {/* Публічні маршрути для неавторизованих */}
+        <Route element={<RestrictedRoute />}>
+          <Route path='/register' element={<RegistrationPage />} />
+          <Route path='/login' element={<LoginPage />} />
         </Route>
-        <Route
-          path='/register'
-          element={
-            <RestrictedRoute component={RegistrationPage} redirectTo='/' />
-          }
-        />
-        <Route
-          path='/login'
-          element={<RestrictedRoute component={LoginPage} redirectTo='/' />}
-        />
+
         <Route path='*' element={<NotFoundPage />} />
+
+        {/* Приватні маршрути */}
+        <Route element={<PrivateRoute />}>
+          <Route element={<UserAcountLayout />}>
+            <Route index element={<HomeTab />} />
+            <Route path='statistics' element={<StatisticsTab />} />
+            {!isTab && <Route path='currency' element={<CurrencyTab />} />}
+          </Route>
+        </Route>
       </Routes>
     </>
   );
