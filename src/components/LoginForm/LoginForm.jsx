@@ -1,0 +1,110 @@
+import { ErrorMessage, Field, Form, Formik } from 'formik';
+import React from 'react';
+import s from './LoginForm.module.css';
+import { useDispatch } from 'react-redux';
+import { login } from '../../redux/auth/authOperations';
+import { useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
+import * as Yup from 'yup';
+
+const LoginForm = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const initialValues = {
+    email: '',
+    password: '',
+  };
+
+  const validSchema = Yup.object().shape({
+    email: Yup.string()
+      .required('The field cannot be empty')
+      .max(64, 'Maximum 64 characters'),
+    password: Yup.string()
+      .required('The field cannot be empty')
+      .min(8, 'Minimum 8 characters')
+      .max(64, 'Maximum 64 characters'),
+  });
+
+  const handleSubmit = (values, actions) => {
+    dispatch(login(values))
+      .unwrap()
+      .then(() => navigate('/statistics', { replace: true }))
+      .catch(error => toast.error(error.message || 'Invalid data'));
+    // actions.resetForm();
+  };
+
+  return (
+    <div>
+      <div className={s.formWrapper}>
+        <img
+          className={s.logo}
+          src="../../../public/logo.svg"
+          width={182}
+          height={94}
+        />
+        <Formik
+          initialValues={initialValues}
+          onSubmit={handleSubmit}
+          validationSchema={validSchema}
+        >
+          <Form className={s.form}>
+            <div className={s.inputsWrap}>
+              {/*  */}
+
+              <div className={s.inputIconWrap}>
+                <svg className={s.icon} width={24} height={24}>
+                  <use href="../../../public/icons.svg#mail"></use>
+                </svg>
+                <Field
+                  className={s.input}
+                  name="email"
+                  type="email"
+                  placeholder="E-mail"
+                />
+                <ErrorMessage
+                  className={s.errorMes}
+                  component="p"
+                  name="email"
+                />
+              </div>
+
+              <div className={s.inputIconWrap}>
+                <svg className={s.icon} width={24} height={24}>
+                  <use href="../../../public/icons.svg#lock"></use>
+                </svg>
+                <Field
+                  className={s.input}
+                  name="password"
+                  placeholder="Password"
+                  type="password"
+                />
+                <ErrorMessage
+                  className={s.errorMes}
+                  component="p"
+                  name="password"
+                />
+              </div>
+            </div>
+
+            <div className={s.btnWrap}>
+              <button className={s.btnLogin} type="submit">
+                Log in
+              </button>
+              <button
+                className={s.btnRegistr}
+                type="button"
+                onClick={() => navigate('/register')}
+              >
+                Register
+              </button>
+            </div>
+          </Form>
+        </Formik>
+        {/* <div className={s.img}></div> */}
+      </div>
+    </div>
+  );
+};
+
+export default LoginForm;

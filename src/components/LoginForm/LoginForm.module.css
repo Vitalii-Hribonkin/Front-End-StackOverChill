@@ -1,0 +1,162 @@
+.formWrapper {
+  width: 280px;
+  height: 528px;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  border: none;
+  background-color: #508f8c;
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-image: url('../../assets/images/hello-1x.png');
+  background-repeat: no-repeat;
+  background-position: right 12px bottom 23px;
+  background-size: 159px 118px;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio: 2),
+  (min-resolution: 2dppx),
+  (min-resolution: 192dpi) {
+  .formWrapper {
+    background-image: url('../../assets/images/hello-2x.png');
+  }
+}
+
+.logo {
+  margin: 16px auto;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.inputsWrap {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.inputIconWrap {
+  position: relative;
+}
+
+.icon {
+  position: absolute;
+  left: 14px;
+  top: 25%;
+}
+
+.input {
+  width: 248px;
+  height: 44px;
+  border: 1px solid #081222;
+  border-radius: 8px;
+  padding-left: 50px;
+}
+
+.input::placeholder {
+  font-weight: 500;
+  font-size: 18px;
+  color: #081222;
+}
+
+.inputIconWrap:hover .input {
+  border-color: #355359;
+}
+
+.inputIconWrap:hover .icon {
+  fill: #355359;
+}
+
+.inputIconWrap:hover .input::placeholder {
+  color: #355359;
+}
+
+.errorMes {
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  font-size: 10px;
+  color: #b20202;
+}
+
+.btnWrap {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.btnLogin {
+  font-size: 18px;
+  font-family: var(--font-family);
+  font-weight: 500;
+  text-align: center;
+  color: #fcfcfc;
+  border: 1px solid black;
+  border-radius: 8px;
+  padding: 11px 79px;
+  width: 248px;
+  height: 44px;
+  background-color: #3b5d63;
+}
+
+.btnRegistr {
+  font-weight: 500;
+  font-size: 18px;
+  text-align: center;
+  color: #081222;
+  border: 1px solid #081222;
+  border-radius: 8px;
+  padding: 11px 68px;
+  width: 248px;
+  height: 44px;
+}
+
+/* //======================== */
+
+@media (min-width: 768px) {
+  .formWrapper {
+    width: 533px;
+    height: 519px;
+    background-image: none;
+  }
+
+  .logo {
+    margin: 53px auto 37px;
+  }
+
+  .inputsWrap {
+    gap: 24px;
+    margin-bottom: 32px;
+  }
+
+  .input {
+    width: 409px;
+    height: 44px;
+  }
+
+  .btnWrap {
+    gap: 24px;
+  }
+
+  .btnLogin {
+    width: 410px;
+    height: 44px;
+  }
+
+  .btnRegistr {
+    width: 410px;
+    height: 44px;
+  }
+}
+/* //======================== */
+
+/* @media (min-width: 1280px) {
+  
+  }
+} */
