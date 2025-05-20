@@ -1,32 +1,54 @@
-
+import toast from "react-hot-toast";
 import ModalEditTransaction from "../ModalEditTransaction/ModalEditTransaction";
+import ModalConfirmDelete from "../ModalConfirmDelete/ModalConfirmDelete";
 import { useState } from 'react';
 import s from "./TransactionsItem.module.css";
 
-const TransactionsItem = ({ transaction, index }) => {
+const TransactionsItem = ({ transaction, index, onDelete }) => {
 
   const [showEdit, setShowEdit] = useState(false);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
 
-  const { date, type, category, comment, sum } = transaction;
+  const { date, type, category, comment, sum, id } = transaction;
+
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const day = date.getDate().toString().padStart(2, '0');
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const year = date.getFullYear();
+    return `${day}.${month}.${year}`;
+  };
+
+  const formatSum = (sum) => {
+    return sum.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  };
+
   const rowClass = index % 2 === 0 ? s.evenRow : s.oddRow;
+
   const handleDelete = () => {
-    // backend
-    setShowDeleteConfirm(false);
-  }
+    fetch(`/api/transactions/${id}`, { method: 'DELETE' })
+      .then(() => {
+        toast.success(`Successfully deleted!`);
+        if (onDelete) onDelete(id);
+        setShowDeleteConfirm(false);
+      })
+      .catch(() => {
+        toast.error("Failed to delete transaction");
+      });
+  };
 
   return (
     <div className={`${s.transactionWrapper} ${rowClass} ${type === "+" ? s.income : s.expense}`}>
       <div className={s.transactionTableRow}>
-        <div className={s.date}>{date}</div>
+        <div className={s.date}>{formatDate(date)}</div>
         <div className={`${s.transactionCell} ${type === "+" || type === "-" ? s.typeCell : ""}`}>{type}</div>
         <div className={s.category}>{category}</div>
         <div className={s.comment}>{comment}</div>
-        <div className={s.sum}>{sum.toLocaleString()}</div>
+        <div className={s.sum}>{formatSum(sum)}</div>
         <div className={s.actions}>
           <button className={s.edit} onClick={() => setShowEdit(true)}>
-            <svg width="14" height="15" viewBox="0 0 14 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M10.4999 6.33343L8.1666 4.0001M1.45825 13.0418L3.43247 12.8224C3.67367 12.7956 3.79427 12.7822 3.907 12.7457C4.007 12.7133 4.10218 12.6676 4.18994 12.6097C4.28885 12.5445 4.37465 12.4587 4.54626 12.2871L12.2499 4.58343C12.8943 3.9391 12.8943 2.89443 12.2499 2.25009C11.6056 1.60576 10.5609 1.60576 9.9166 2.25009L2.21293 9.95375C2.04132 10.1254 1.95552 10.2112 1.89029 10.3101C1.83242 10.3978 1.78668 10.493 1.7543 10.593C1.71781 10.7057 1.70441 10.8263 1.67761 11.0675L1.45825 13.0418Z" stroke="#FCFCFC" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+            <svg className={s.svgEditIcon} width="14" height="14">
+              <use href="/icons.svg#edit"></use>
             </svg>
             <span className={s.label}>Edit</span>
           </button>
@@ -62,14 +84,14 @@ const TransactionsItem = ({ transaction, index }) => {
           </div>
           <div className={s.actions}>
             <div className={s.svgButton}>
-              <svg className={s.svgDelete} width="14" height="15" viewBox="0 0 14 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M10.4999 6.33343L8.1666 4.0001M1.45825 13.0418L3.43247 12.8224C3.67367 12.7956 3.79427 12.7822 3.907 12.7457C4.007 12.7133 4.10218 12.6676 4.18994 12.6097C4.28885 12.5445 4.37465 12.4587 4.54626 12.2871L12.2499 4.58343C12.8943 3.9391 12.8943 2.89443 12.2499 2.25009C11.6056 1.60576 10.5609 1.60576 9.9166 2.25009L2.21293 9.95375C2.04132 10.1254 1.95552 10.2112 1.89029 10.3101C1.83242 10.3978 1.78668 10.493 1.7543 10.593C1.71781 10.7057 1.70441 10.8263 1.67761 11.0675L1.45825 13.0418Z" stroke="#FCFCFC" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+              <svg className={s.svgEdit} width="14" height="14" >
+                <use href="/icons.svg#edit"></use>
               </svg>
               <button className={s.delete} onClick={() => setShowDeleteConfirm(true)}>Delete</button>
             </div>
             <button className={s.edit} onClick={() => setShowEdit(true)}>
-              <svg width="14" height="15" viewBox="0 0 14 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M10.4999 6.33343L8.1666 4.0001M1.45825 13.0418L3.43247 12.8224C3.67367 12.7956 3.79427 12.7822 3.907 12.7457C4.007 12.7133 4.10218 12.6676 4.18994 12.6097C4.28885 12.5445 4.37465 12.4587 4.54626 12.2871L12.2499 4.58343C12.8943 3.9391 12.8943 2.89443 12.2499 2.25009C11.6056 1.60576 10.5609 1.60576 9.9166 2.25009L2.21293 9.95375C2.04132 10.1254 1.95552 10.2112 1.89029 10.3101C1.83242 10.3978 1.78668 10.493 1.7543 10.593C1.71781 10.7057 1.70441 10.8263 1.67761 11.0675L1.45825 13.0418Z" stroke="#FCFCFC" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+              <svg className={s.svgEditIcon} width="14" height="14" >
+                <use href="/icons.svg#edit"></use>
               </svg>
               <span className={s.label}>Edit</span>
             </button>
@@ -79,21 +101,22 @@ const TransactionsItem = ({ transaction, index }) => {
 
 
       {showDeleteConfirm && (
-        <div className={s.confirmDialog}>
-          <p>Are you sure you want to Delete?</p>
-          <button onClick={handleDelete}>Delete</button>
-          <button onClick={() => setShowDeleteConfirm(false)}>Cancel</button>
+        <div>
+          <ModalConfirmDelete
+            onConfirm={handleDelete}
+            onCancel={() => setShowDeleteConfirm(false)}
+            onClose={() => setShowDeleteConfirm(false)}
+          />
         </div>
       )
       }
 
-      {
-        showEdit && (
-          <ModalEditTransaction
-            transaction={transaction}
-            onClose={() => setShowEdit(false)}
-          />
-        )
+      {showEdit && (
+        <ModalEditTransaction
+          transaction={transaction}
+          onClose={() => setShowEdit(false)}
+        />
+      )
       }
     </div>
   );

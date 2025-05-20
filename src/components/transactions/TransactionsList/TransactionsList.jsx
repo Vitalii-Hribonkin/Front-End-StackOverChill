@@ -1,10 +1,16 @@
 
+import { useState } from 'react';
 import TransactionsItem from '../TransactionsItem/TransactionsItem'
 import s from "./TransactionsList.module.css";
 
 const TransactionsList = ({ transactions }) => {
 
-  if (!transactions || transactions.length === 0) {
+  const [currentTransactions, setTransactions] = useState(transactions);
+  const handleDeleteTransaction = (transactionId) => {
+    setTransactions(prev => prev.filter(tx => tx.id !== transactionId));
+  };
+
+  if (!currentTransactions || currentTransactions.length === 0) {
     return <p className={s.placeholderText}>You have no transactions.</p>;
   }
 
@@ -18,8 +24,12 @@ const TransactionsList = ({ transactions }) => {
         <span className={s.sumHeader}>Sum</span>
       </div>
       <div className={s.list}>
-        {transactions.map((tx, index) => (
-          <TransactionsItem key={tx.id} transaction={tx} index={index} />
+        {currentTransactions.map((tx, index) => (
+          <TransactionsItem
+            key={tx.id}
+            transaction={tx}
+            index={index}
+            onDelete={handleDeleteTransaction} />
         ))}
       </div>
     </div>

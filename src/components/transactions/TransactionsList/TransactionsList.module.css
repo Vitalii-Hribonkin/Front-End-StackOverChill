@@ -1,23 +1,8 @@
-/* Мобілка: до 767px */
-
-/* .container {
-  width: 100%; 
-  max-width: 767px;
-} */
-
 .header {
   display: none;
 }
 
-/* Планшет: 768px і нижче */
-
-@media screen and (min-width: 768px) and (max-width: 1279px) {
-
-  /* @media screen and (max-width: 768px) {
-  .container {
-    padding-left: 32px;
-    padding-right: 32px;
-  } */
+@media screen and (min-width: 768px) {
 
   .container {
     border: 1px solid #000;
@@ -32,7 +17,7 @@
 
   .header {
     display: grid;
-    grid-template-columns: 1fr 0.5fr 1fr 2fr 1fr 1fr;
+    grid-template-columns: 1fr 0.5fr 1fr 1fr 1fr 1fr;
     align-items: start;
     margin: 32px 16px 16px 16px;
     font-weight: 600;
@@ -62,10 +47,6 @@
 }
 
 @media screen and (min-width: 1280px) {
-  .container {
-    padding-left: 24px;
-    padding-right: 24px;
-  }
 
   .container {
     border: 1px solid #000;
