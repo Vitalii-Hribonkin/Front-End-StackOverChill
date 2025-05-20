@@ -1,0 +1,128 @@
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+.modal {
+    background: #508f8c;
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+    width: 280px;
+    height: 312px;
+    padding: 16px 16px 22px;
+}
+.logoBlock {
+    margin-top: 0;
+    margin-bottom: 16px;
+}
+.logo {
+    width: 182px;
+    height: 94px;
+}
+.message {
+    color: #081222;
+    font-size: 18px;
+    text-align: center;
+    margin-bottom: 16px;
+}
+.buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+.logout,
+.cancel {
+    width: 100%;
+    max-width: 248px;
+    height: 44px;
+    font-size: 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.logout {
+    background: linear-gradient(180deg, #355359 0%, #3b5d63 100%);
+    color: #fcfcfc;
+    border: none;
+}
+.cancel {
+    background: transparent;
+    color: #081222;
+    border: 1px solid #081222;
+}
+.logout+.cancel {
+    margin-top: 16px;
+}
+@media screen and (min-width: 768px) and (max-width: 1279px) {
+    .modal {
+        width: 533px;
+        height: 387px;
+        padding: 53px 24px 47px;
+    }
+    .logoBlock {
+        margin-bottom: 38px;
+    }
+    .logo {
+        width: 182px;
+        height: 94px;
+    }
+
+    .message {
+        font-size: 20px;
+        margin-bottom: 24px;
+        color: #081222;
+    }
+    .logout,
+    .cancel {
+        max-width: 410px;
+        height: 44px;
+        font-size: 18px;
+    }
+
+    .logout+.cancel {
+        margin-top: 24px;
+    }
+}
+@media screen and (min-width: 1280px) {
+    .modal {
+        width: 533px;
+        height: 387px;
+        padding: 53px 24px 47px;
+    }
+
+    .logoBlock {
+        margin-bottom: 38px;
+    }
+
+    .logo {
+        width: 182px;
+        height: 94px;
+    }
+
+    .message {
+        font-size: 22px;
+        margin-bottom: 24px;
+        color: #081222;
+    }
+
+    .logout,
+    .cancel {
+        max-width: 410px;
+        height: 44px;
+        font-size: 18px;
+    }
+    .logout+.cancel {
+        margin-top: 24px;
+    }
+}
