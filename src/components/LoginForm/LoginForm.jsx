@@ -43,6 +43,7 @@ const LoginForm = () => {
           src="../../../public/logo.svg"
           width={182}
           height={94}
+          alt="Logo"
         />
         <Formik
           initialValues={initialValues}
@@ -51,25 +52,6 @@ const LoginForm = () => {
         >
           <Form noValidate className={s.form}>
             <div className={s.inputsWrap}>
-              {/*  */}
-
-              {/* <div className={s.inputIconWrap}>
-                <svg className={s.icon} width={24} height={24}>
-                  <use href="../../../public/icons.svg#mail"></use>
-                </svg>
-                <Field
-                  className={s.input}
-                  name="email"
-                  type="email"
-                  placeholder="E-mail"
-                />
-                <ErrorMessage
-                  className={s.errorMes}
-                  component="p"
-                  name="email"
-                />
-                          </div> */}
-
               <Field name="email">
                 {({ field, meta }) => (
                   <div
@@ -84,7 +66,7 @@ const LoginForm = () => {
                       width={24}
                       height={24}
                     >
-                      <use href="../../../public/icons.svg#mail"></use>
+                      <use href="/icons.svg#mail"></use>
                     </svg>
 
                     <input
@@ -103,23 +85,6 @@ const LoginForm = () => {
                 )}
               </Field>
 
-              {/* <div className={s.inputIconWrap}>
-                <svg className={s.icon} width={24} height={24}>
-                  <use href="../../../public/icons.svg#lock"></use>
-                </svg>
-                <Field
-                  className={s.input}
-                  name="password"
-                  placeholder="Password"
-                  type="password"
-                />
-                <ErrorMessage
-                  className={s.errorMes}
-                  component="p"
-                  name="password"
-                />
-              </div> */}
-
               <Field name="password">
                 {({ field, meta }) => (
                   <div
@@ -134,7 +99,7 @@ const LoginForm = () => {
                       width={24}
                       height={24}
                     >
-                      <use href="../../../public/icons.svg#lock"></use>
+                      <use href="/icons.svg#lock"></use>
                     </svg>
 
                     <input
@@ -168,7 +133,6 @@ const LoginForm = () => {
             </div>
           </Form>
         </Formik>
-        {/* <div className={s.img}></div> */}
       </div>
     </div>
   );
