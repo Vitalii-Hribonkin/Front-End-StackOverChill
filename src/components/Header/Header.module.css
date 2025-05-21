@@ -1,0 +1,111 @@
+.header {
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 24px;
+    background: var(--bg-gradient-355359);
+}
+
+.logoBlock {
+    display: flex;
+    align-items: center;
+    width: 104px;
+    height: 53px;
+}
+
+.logo {
+    max-width: 100%;
+    height: auto;
+}
+
+.userBlock {
+    display: flex;
+    align-items: center;
+}
+
+.username {
+    font-weight: 400;
+    font-size: 16px;
+    color: #fcfcfc;
+    display: flex;
+    align-items: center;
+    margin-right: 12px;
+}
+.username::after {
+    content: "";
+    display: inline-block;
+    width: 2px;
+    height: 30px;
+    background-color: #ccc;
+    margin-left: 12px;
+}
+
+.exitBtn {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    font-weight: 400;
+    border: none;
+    background: transparent;
+    color: #fcfcfc;
+    border-radius: 8px;
+    cursor: pointer;
+    padding: 10px 0;
+    gap: 8px;
+}
+
+.icon {
+    fill: #fcfcfc;
+    width: 18px;
+    height: 18px;
+    pointer-events: none;
+}
+@media screen and (max-width: 767px) {
+    .header {
+        height: 70px;
+        padding: 10px 16px;
+    }
+
+    .logoBlock {
+        width: 70px;
+        height: 54px;
+    }
+
+    .username {
+        font-size: 14px;
+        margin-right: 12px;
+    }
+
+    .username::after {
+        height: 26px;
+        margin-left: 12px;
+    
+    }
+
+    .exitBtn {
+        font-size: 14px;
+        height: 40px;
+        padding: 8px 0;
+     
+    }
+    .icon {
+        width: 16px;
+        height: 16px;
+    }
+}
+@media screen and (min-width: 768px) and (max-width: 1279px) {
+    .header {
+        height: 80px;
+        padding: 12px 20px;
+    }
+
+    .logoBlock {
+        width: 104px;
+        height: 53px;
+    }
+    .exitBtn {
+        padding: 10px 0;
+        gap: 8px;
+    }
+}
