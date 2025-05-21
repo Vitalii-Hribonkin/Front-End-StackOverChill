@@ -7,6 +7,7 @@ const initialState = {
     email: '',
     balance: 0,
   },
+  isLoading: false,
 };
 
 const userSlice = createSlice({
@@ -14,11 +15,19 @@ const userSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: builder => {
-    builder.addCase(getUser.fulfilled, (state, action) => {
-      state.userInfo.name = action.payload.name;
-      state.userInfo.email = action.payload.email;
-      state.userInfo.balance = action.payload.balance;
-    });
+    builder
+      .addCase(getUser.fulfilled, (state, action) => {
+        state.userInfo.name = action.payload.name;
+        state.userInfo.email = action.payload.email;
+        state.userInfo.balance = action.payload.balance;
+        state.isLoading = false;
+      })
+      .addCase(getUser.pending, (state, action) => {
+        state.isLoading = true;
+      })
+      .addCase(getUser.rejected, (state, action) => {
+        state.isLoading = false;
+      });
   },
 });
 
