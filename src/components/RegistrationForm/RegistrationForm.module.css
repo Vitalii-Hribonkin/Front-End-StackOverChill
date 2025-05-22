@@ -1,0 +1,159 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #508f8c;
+  border-radius: 16px;
+  width: 288px;
+  height: auto;
+  padding-bottom: 46px;
+}
+.containerTitle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 182px;
+  height: auto;
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+.titleRegistration {
+  font-weight: 700;
+  font-size: 30px;
+  text-align: center;
+  color: #081222;
+}
+.registrationValue {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
+  gap: 16px;
+  width: 256px;
+  padding-bottom: 16px;
+}
+.label {
+  position: relative;
+}
+.icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  fill: #081222;
+}
+
+.input {
+  border: 1px solid black;
+  border-radius: 8px;
+  padding-left: 50px;
+  width: 256px;
+  height: 44px;
+}
+::placeholder {
+  font-weight: 500;
+  font-size: 18px;
+  color: #081222;
+}
+.containerButton {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-direction: column;
+  gap: 16px;
+  width: 256px;
+}
+.button,
+.linkButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  border: 1px solid #081222;
+  border-radius: 8px;
+  width: 256px;
+  height: 44px;
+  font-weight: 500;
+  font-size: 18px;
+  text-align: center;
+  color: #081222;
+}
+.button:active,
+.button:hover,
+.linkButton:active,
+.linkButton:hover {
+  background: linear-gradient(180deg, #355359 0%, #3b5d63 100%);
+  color: #fcfcfc;
+}
+.image {
+  display: none;
+}
+.error {
+  position: absolute;
+  bottom: -18px;
+  left: 50px;
+  color: red;
+  text-align: left;
+  font-size: 14px;
+}
+
+/* region media 768px */
+@media screen and (min-width: 768px) {
+  .container {
+    flex-direction: column;
+  }
+  .form {
+    width: 533px;
+    padding-bottom: 50px;
+  }
+  .containerTitle {
+    padding-top: 32px;
+    padding-bottom: 32px;
+  }
+  .registrationValue {
+    gap: 24px;
+    width: 409px;
+    padding-bottom: 56px;
+  }
+  .input {
+    width: 409px;
+  }
+  .containerButton {
+    gap: 21px;
+    width: 409px;
+  }
+  .button,
+  .linkButton {
+    width: 409px;
+  }
+  .image {
+    display: block;
+    position: static;
+    width: 320px;
+    height: auto;
+    transform: translateX(330px);
+  }
+}
+/* endregion media 768px */
+
+/* region media 1280px */
+@media screen and (min-width: 1280px) {
+  .containerForm {
+    position: relative;
+  }
+
+  .image {
+    position: absolute;
+    bottom: 0;
+    width: 326px;
+    bottom: +7px;
+    transform: translateX(564px);
+  }
+}
+/* endregion media 1280px */

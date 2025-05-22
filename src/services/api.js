@@ -1,11 +1,11 @@
-import axios from 'axios';
+import axios from "axios";
 
 export const api = axios.create({
-  baseURL: 'http://localhost:3000',
+  baseURL: "http://localhost:3000",
 });
 
 // export const api = axios.create({
-//   baseURL: 'https://back-end-stackoverchill-793z.onrender.com',
+//   baseURL: "https://back-end-stackoverchill-793z.onrender.com",
 // });
 
 export const setAuthHeader = (token) => {
@@ -13,5 +13,5 @@ export const setAuthHeader = (token) => {
 };
 
 export const clearAuthHeader = () => {
-  api.defaults.headers.common.Authorization = '';
+  api.defaults.headers.common.Authorization = "";
 };
