@@ -1,0 +1,23 @@
+@media (min-width: 768px) {
+  .img {
+    width: 100vw;
+    height: 100vh;
+    background-image: url('../../assets/images/hello-1x.png');
+    background-repeat: no-repeat;
+    background-size: 320px 239px;
+    background-position: right 1px bottom 58px;
+    object-fit: contain;
+  }
+  @media screen and (-webkit-min-device-pixel-ratio: 2),
+    (min-resolution: 2dppx),
+    (min-resolution: 192dpi) {
+    .img {
+      background-image: url('../../assets/images/hello-2x.png');
+    }
+  }
+}
+@media (min-width: 1280px) {
+  .img {
+    background-position: right 16px bottom 35px;
+  }
+}
