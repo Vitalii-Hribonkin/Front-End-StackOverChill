@@ -1,4 +1,6 @@
 import css from "./RegistrationForm.module.css";
+import good1x from "../../assets/images/good-1x.png";
+import good2x from "../../assets/images/good-2x.png";
 
 import * as Yup from "yup";
 
@@ -33,15 +35,19 @@ const RegistrationForm = () => {
   });
 
   const handleSubmit = (values, { resetForm }) => {
+    console.log("Submitted values:", values);
     dispatch(register(values))
       .unwrap()
       .then((response) => {
-        toast.success(`Welcome, ${response.user.name}`);
+        const userName = response?.user?.name || "User";
+        toast.success(`Welcome, ${userName}`);
         resetForm();
         navigate("/");
       })
-      .catch(() => {
-        toast.error("This email is already in use.");
+      .catch((error) => {
+        const errorMessage =
+          error.response?.data?.message || "Registration failed.";
+        toast.error(errorMessage);
       });
   };
 
@@ -159,7 +165,8 @@ const RegistrationForm = () => {
         </Formik>
         <img
           className={css.image}
-          src="/src/assets/images/good-2x.png"
+          src={good1x}
+          srcSet={`${good1x} 1x, ${good2x} 2x`}
           alt="Wallet icon"
         />
       </div>
