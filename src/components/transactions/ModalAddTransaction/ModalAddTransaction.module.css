@@ -1,0 +1,30 @@
+.backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    backdrop-filter: blur(7px);
+    background: linear-gradient(180deg, rgba(53, 83, 89, 0.4), rgba(59, 93, 99, 0.4));
+    z-index: 999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal {
+    background: #508f8c;
+    border-radius: 8px;
+    width: 540px;
+    height: 511px;
+    position: relative;
+}
+
+.close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
