@@ -18,6 +18,8 @@ import transactionsReducer from './transactions/transactionsSlice';
 import statisticsReducer from './statistics/statisticsSlice';
 import currencyReducer from './currency/currencySlice';
 import globalReducer from './globalSlice'; 
+import categoriesReducer from './categories/categoriesSlice';
+
 
 // Налаштування persist тільки для auth (з токеном)
 const authPersistConfig = {
@@ -39,6 +41,7 @@ const rootReducer = combineReducers({
   statistics: statisticsReducer,
   currency: persistReducer(currencyPersistConfig, currencyReducer),
   global: globalReducer,
+  categories: categoriesReducer,
 });
 
 // Створення store
