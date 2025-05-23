@@ -49,18 +49,17 @@ export const refreshUser = createAsyncThunk(
     const state = thunkAPI.getState();
     const persistedToken = state.auth.token;
 
-    if (persistedToken === null) {
-      return thunkAPI.rejectWithValue("Unable to fetch user");
+    if (!persistedToken) {
+      return thunkAPI.rejectWithValue("No token found");
     }
+
     try {
       setAuthHeader(persistedToken);
-      const response = await api.get("/user");
+      const response = await api.get("/users"); // твій ендпоінт
       return response.data;
     } catch (e) {
-      toast.error("Refresh failed");
-      await api.post("/auth/logout");
-      clearAuthHeader();
-      return thunkAPI.rejectWithValue(e.message);
+      clearAuthHeader(); // просто чистимо хедер
+      return thunkAPI.rejectWithValue(e.response?.data?.message || e.message);
     }
   }
 );
