@@ -1,0 +1,332 @@
+.transactionCard {
+    border-radius: 10px;
+    margin-bottom: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    background: linear-gradient(180deg, #355359 0%, #3b5d63 100%);
+}
+
+.transactionTableRow {
+    display: none;
+}
+
+.income {
+    border-left: 6px solid #24cca7;
+}
+
+.expense {
+    border-left: 6px solid #dfad3f;
+}
+
+.mobileField {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 0;
+    padding-left: 14px;
+    padding-right: 21px;
+    border-bottom: 1px solid #ddd;
+}
+
+.fieldName {
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.fieldValue {
+    font-weight: 400;
+    font-size: 16px;
+}
+
+.sumNegative {
+    font-weight: 600;
+    font-size: 16px;
+    color: #dfad3f;
+}
+
+.sumPositive {
+    font-weight: 600;
+    font-size: 16px;
+    color: #24cca7;
+}
+
+.actions {
+    display: flex;
+    justify-content: space-between;
+    padding-left: 14px;
+    padding-right: 21px;
+    gap: 10px;
+}
+
+.svgEdit {
+    display: none;
+}
+
+.svgEditIcon {
+    stroke: #fcfcfc;
+    stroke-width: 1.2px;
+    fill: none;
+}
+
+.delete {
+    border: 1px solid #fcfcfc;
+    border-radius: 8px;
+    padding: 4px 12px;
+    margin-top: 12px;
+    margin-bottom: 14px;
+    font-weight: 400;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.edit {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-weight: 400;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.confirmDialog {
+    margin-top: 10px;
+    padding: 10px;
+    font-size: 14px;
+}
+
+@media screen and (min-width: 768px) {
+
+    .transactionWrapper {
+        border-radius: 16px;
+        padding: 4px;
+        margin-left: 16px;
+        margin-right: 16px;
+    }
+
+    .transactionTableRow {
+        height: auto;
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr 0.5fr 1fr 1fr 1fr 1fr;
+        align-items: start;
+        font-weight: 400;
+        font-size: 14px;
+        overflow: visible;
+    }
+
+    .transactionCard {
+        display: none;
+    }
+
+    .income {
+        border-left: none;
+    }
+
+    .expense {
+        border-left: none;
+    }
+
+    .date {
+        display: flex;
+        align-items: center;
+        padding: 0px;
+        white-space: nowrap;
+        height: 100%;
+    }
+
+    .typeCell {
+        display: flex;
+        align-items: center;
+        padding-left: 12px;
+        height: 100%;
+    }
+
+    .category {
+        display: flex;
+        align-items: center;
+        height: 100%;
+    }
+
+    .comment {
+        display: flex;
+        align-items: center;
+        height: 100%;
+    }
+
+    .sum {
+        display: flex;
+        align-items: center;
+        font-weight: 600;
+        font-size: 16px;
+        height: 100%;
+    }
+
+    .actions {
+        display: flex;
+        gap: 6px;
+        justify-content: center;
+        padding: 0;
+        margin-right: 10px;
+    }
+
+    .delete {
+        transition: background-color 0.2s ease;
+        border: 1px solid #fcfcfc;
+        border-radius: 8px;
+        padding: 4px 12px;
+        width: 67px;
+        height: 25px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .edit {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 24px;
+    }
+
+    .svgEdit {
+        stroke-width: 1.20px;
+        stroke: #fcfcfc;
+    }
+
+    .label {
+        display: none;
+    }
+
+    .svgButton {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: row;
+        gap: 24px;
+    }
+
+    .oddRow {
+        background: linear-gradient(180deg, #294045 0%, #1e2f33 100%);
+        margin-bottom: 16px;
+    }
+
+}
+
+@media screen and (min-width: 1280px) {
+
+    .transactionWrapper {
+        border-radius: 16px;
+        padding: 4px;
+        margin-left: 16px;
+        margin-right: 16px;
+    }
+
+    .transactionTableRow {
+        height: auto;
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr 0.5fr 1fr 2fr 1fr 1fr;
+        align-items: start;
+        font-weight: 400;
+        font-size: 14px;
+        overflow: visible;
+    }
+
+    .transactionCard {
+        display: none;
+    }
+
+    .income {
+        border-left: none;
+    }
+
+    .expense {
+        border-left: none;
+    }
+
+    .date {
+        display: flex;
+        align-items: center;
+        padding: 0px;
+        white-space: nowrap;
+        height: 100%;
+    }
+
+    .typeCell {
+        display: flex;
+        align-items: center;
+        padding-left: 12px;
+        height: 100%;
+    }
+
+    .category {
+        display: flex;
+        align-items: center;
+        height: 100%;
+    }
+
+    .comment {
+        display: flex;
+        align-items: center;
+        height: 100%;
+    }
+
+    .sum {
+        display: flex;
+        align-items: center;
+        font-weight: 600;
+        font-size: 16px;
+        height: 100%;
+    }
+
+    .actions {
+        display: flex;
+        gap: 6px;
+        justify-content: center;
+        padding: 0;
+        margin-right: 10px;
+    }
+
+    .delete {
+        transition: background-color 0.2s ease;
+        border: 1px solid #fcfcfc;
+        border-radius: 8px;
+        padding: 4px 12px;
+        width: 67px;
+        height: 25px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .edit {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 24px;
+    }
+
+    .label {
+        display: none;
+    }
+
+    .svgButton {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: row;
+        gap: 24px;
+    }
+
+    .oddRow {
+        background: linear-gradient(180deg, #294045 0%, #1e2f33 100%);
+        margin-bottom: 16px;
+    }
+
+    .confirmDialog {
+        grid-column: 1 / -1;
+        margin-top: 10px;
+        padding: 10px;
+        border-radius: 4px;
+    }
+}

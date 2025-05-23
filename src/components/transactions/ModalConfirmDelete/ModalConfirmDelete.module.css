@@ -1,0 +1,94 @@
+.overlay {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 16px;
+    padding: 32px 16px;
+    width: 287px;
+    height: 352px;
+    background: #508f8c;
+    z-index: 99;
+}
+
+.iconClose {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    stroke-width: 1px;
+    stroke: #081222;
+}
+
+.logo {
+    display: block;
+    margin: 0 auto 25px;
+}
+
+.text {
+    font-weight: 400;
+    font-size: 18px;
+    text-align: center;
+    color: #081222;
+    margin-bottom: 25px;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.deleteBtn {
+    border-radius: 8px;
+    padding: 11px 79px;
+    width: 255px;
+    height: 44px;
+    background: #b20202;
+    font-weight: 500;
+    font-size: 18px;
+    text-align: center;
+    margin-bottom: 12px;
+    width: 100%;
+}
+
+.cancelBtn {
+    border: 1px solid #081222;
+    border-radius: 8px;
+    padding: 11px 68px;
+    width: 255px;
+    height: 44px;
+    font-weight: 500;
+    font-size: 18px;
+    text-align: center;
+    color: #081222;
+}
+
+@media screen and (min-width: 768px) {
+    .overlay {
+        width: 533px;
+        height: 387px;
+    }
+
+    .iconClose {
+        top: 24px;
+        right: 24px;
+    }
+
+    .logo {
+        margin-bottom: 38px;
+    }
+
+    .text {
+        margin-bottom: 24px;
+    }
+
+    .deleteBtn,
+    .cancelBtn {
+        width: 410px;
+        height: 44px;
+    }
+
+    .deleteBtn {
+        margin-bottom: 21px;
+    }
+}
