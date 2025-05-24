@@ -1,0 +1,61 @@
+.typeContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  color: var(--bg-081222);
+  font-weight: 600;
+  font-size: 16px;
+  margin-bottom: 30px;
+}
+
+.typeBtn {
+  border-radius: 30px;
+  width: 87px;
+  height: 40px;
+  background-color: var(--text-white);
+  display: flex;
+  align-items: center;
+}
+
+.iconBg {
+  border-radius: 100%;
+  fill: var(--bg-dfad3f);
+  stroke: var(--bg-dfad3f);
+}
+
+.ellipse {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.transition {
+  transition: all 250ms linear;
+}
+
+.slide {
+  transform: translateX(100%);
+}
+
+.expense {
+  fill: var(--bg-b20202);
+  stroke: var(--bg-b20202);
+}
+
+.icon {
+  position: absolute;
+  top: 11px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.minus {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 22px;
+  height: 3px;
+  background-color: var(--text-white);
+}

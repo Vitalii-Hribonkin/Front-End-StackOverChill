@@ -1,0 +1,69 @@
+.title {
+  font-weight: 700;
+  font-size: 30px;
+  text-align: center;
+  color: var(--bg-081222);
+  margin-bottom: 30px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.label {
+  display: block;
+  width: 100%;
+}
+
+.label .input {
+  position: relative;
+  border-radius: 8px;
+  padding: 10px 14px;
+  width: 271px;
+  height: 44px;
+  border: 1px solid var(--bg-081222);
+  color: var(--bg-081222);
+}
+
+.form .label .calendar {
+  position: absolute;
+  top: 50%;
+  right: 14px;
+  padding: 0;
+  transform: translateY(-50%);
+}
+
+.arrow {
+  fill: none;
+  stroke: var(--bg-081222);
+}
+
+.error {
+  display: block;
+  margin-top: 4px;
+  margin-left: 8px;
+  font-size: 12px;
+  color: var(--bg-b20202);
+}
+
+.btn {
+border-radius: 8px;
+padding: 11px 79px;
+width: 100%;
+height: 44px;
+font-weight: 500;
+font-size: 18px;
+text-align: center;
+}
+
+.submit {
+  color: var(--text-white);
+  background: var(--bg-gradient-355359);
+}
+
+.cancel {
+  color: var(--bg-081222);
+  border: 1px solid var(--bg-081222);
+}
