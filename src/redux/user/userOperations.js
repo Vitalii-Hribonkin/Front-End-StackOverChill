@@ -4,8 +4,8 @@ import toast from 'react-hot-toast';
 
 export const getUser = createAsyncThunk('getUser', async (_, thunkAPI) => {
   try {
-    const { data } = await api.get('/user');
-    return data;
+    const { data } = await api.get('/users');
+    return data.data;
   } catch (error) {
     toast.error(error.message);
     return thunkAPI.rejectWithValue(error.message);
