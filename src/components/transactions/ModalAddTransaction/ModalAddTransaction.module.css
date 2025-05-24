@@ -16,15 +16,26 @@
     background: #508f8c;
     border-radius: 8px;
     width: 540px;
-    height: 511px;
     position: relative;
 }
 
 .close {
     position: absolute;
-    top: 12px;
-    right: 12px;
+    top: 20px;
+    right: 20px;
     background: transparent;
     border: none;
     cursor: pointer;
+}
+.svg{
+    stroke: #081222;
+}
+
+.h2{
+    font-family: "Inter", sans-serif;
+    font-weight: 700;
+    font-size: 30px;
+    text-align: center;
+    color: #081222;
+    margin-top: 40px;
 }
