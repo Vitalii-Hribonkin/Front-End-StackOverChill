@@ -1,0 +1,11 @@
+.form {
+  display: flex;
+  justify-content: space-around;
+  gap: 20px;
+  width: 395px;
+  height: 44px;
+}
+
+.select {
+  z-index: 10;
+}

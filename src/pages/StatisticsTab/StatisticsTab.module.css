@@ -1,0 +1,13 @@
+.container {
+  border-radius: 16px;
+  padding: 16px 32px;
+  width: 757px;
+  height: 582px;
+  background: var(--bg-gradient-355359);
+  display: flex;
+  /* justify-content: space-between; */
+  gap: 16px;
+}
+.wraper {
+  margin: 0 auto;
+}
