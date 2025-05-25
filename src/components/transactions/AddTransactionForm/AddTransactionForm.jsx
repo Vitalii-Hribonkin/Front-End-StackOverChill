@@ -1,7 +1,7 @@
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import s from './AddTransactionForm.module.css';
-import  { useEffect } from 'react';
+import { useEffect } from 'react';
 import DatePickerComponent from '../DatePickerComponent';
 import SelectComponent from '../SelectComponent';
 import TypeButton from '../TypeButton/TypeButton';
@@ -90,8 +90,7 @@ const AddTransactionForm = ({ onClose }) => {
         {({ values, setFieldValue }) => (
           <Form className={s.form}>
             {!isIncome && (
-              <div className={s.cont_comp}>
-                 <label className={s.label}>
+              <label className={s.label}>
                 <SelectComponent
                   values={values}
                   setFieldValue={setFieldValue}
@@ -99,50 +98,66 @@ const AddTransactionForm = ({ onClose }) => {
                 />
                 <ErrorMessage
                   className={s.error}
-                  name='category'
-                  component='span'
+                  name="category"
+                  component="span"
                 />
               </label>
-              </div>
-             
             )}
-            <div className={s.cont_flex}>
+
+            <div className={s.wrapper}>
               <label className={s.label}>
-              <Field className={s.input} type='text' name='amount'placeholder="0.00" />
-              <ErrorMessage
-                className={s.error}
-                name='amount'
-                component='span'
-              />
-            </label>
-            <div className={s.input}>
-              <DatePickerComponent
-                values={values}
-                setFieldValue={setFieldValue}
-              />
-              <ErrorMessage className={s.error} name='date' component='span' />
+                <Field
+                  className={s.input}
+                  type="text"
+                  name="amount"
+                  placeholder="0.00"
+                />
+                <ErrorMessage
+                  className={s.error}
+                  name="amount"
+                  component="span"
+                />
+              </label>
+
+              <div className={s.label}>
+                <DatePickerComponent
+                  values={values}
+                  setFieldValue={setFieldValue}
+                />
+                <ErrorMessage
+                  className={s.error}
+                  name="date"
+                  component="span"
+                />
+              </div>
             </div>
-            </div>
-            
+
             <label className={s.label}>
-              <Field className={s.textearea} type='text' name='comment' placeholder="Comment" />
+              <Field
+                className={s.input}
+                type="text"
+                name="comment"
+                placeholder="Comment"
+              />
               <ErrorMessage
                 className={s.error}
-                name='comment'
-                component='span'
+                name="comment"
+                component="span"
               />
             </label>
 
-            <button type='submit' className={clsx(s.btn, s.submit)}>
-              Add
-            </button>
-            <button
-              type='button'
-              className={clsx(s.btn, s.cancel)}
-              onClick={onClose}
-            >
-              Cancel
-            </button>
+            <div className={s.btnContainer}>
+              <button type="submit" className={clsx(s.btn, s.submit)}>
+                Add
+              </button>
+              <button
+                type="button"
+                className={clsx(s.btn, s.cancel)}
+                onClick={onClose}
+              >
+                Cancel
+              </button>
+            </div>
           </Form>
         )}
       </Formik>
