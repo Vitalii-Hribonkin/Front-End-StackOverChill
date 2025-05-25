@@ -7,7 +7,7 @@ import SelectComponent from '../SelectComponent';
 import TypeButton from '../TypeButton/TypeButton';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-  SelectCategories,
+  selectCategories,
   selectIsIncome,
 } from '../../../redux/categories/categoriesSelectors';
 import {
@@ -16,11 +16,12 @@ import {
 } from '../../../redux/categories/categoriesSlice';
 import { fetchCategories } from '../../../redux/categories/categoriesOperations';
 import clsx from 'clsx';
+import { editTransaction } from '../../../redux/transactions/transactionsOperations';
 
 
 const EditTransactionForm = ({ transaction, onClose }) => {
   const dispatch = useDispatch();
-  const categories = useSelector(SelectCategories);
+  const categories = useSelector(selectCategories);
   const isIncome = useSelector(selectIsIncome);
   const { date, amount, category, comment, categoryId, _id } = transaction;
 
@@ -72,14 +73,14 @@ const EditTransactionForm = ({ transaction, onClose }) => {
       }
     }
 
-    // dispatch(
-    //   editTransaction({
-    //     _id,
-    //     ...changedFields,
-    //     categoryId: data.categoryId,
-    //     amount: data.amount,
-    //   }),
-    // );
+    dispatch(
+      editTransaction({
+        _id,
+        ...changedFields,
+        categoryId: data.categoryId,
+        amount: data.amount,
+      }),
+    );
     onClose();
   };
 
