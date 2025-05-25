@@ -30,7 +30,6 @@ const ModalAddTransaction = ({ onClose }) => {
             <use href="/icons.svg#close"></use>
           </svg>
         </button>
-        <h2 className={s.h2}>Add transaction</h2>
         <div>
           <AddTransactionForm/>
         </div>

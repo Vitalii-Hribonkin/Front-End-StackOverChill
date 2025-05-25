@@ -17,6 +17,10 @@
     border-radius: 8px;
     width: 540px;
     position: relative;
+    padding-left: 65px;
+    padding-right: 65px;
+    padding-top: 40px;
+    padding-bottom: 46px;
 }
 
 .close {
@@ -31,11 +35,3 @@
     stroke: #081222;
 }
 
-.h2{
-    font-family: "Inter", sans-serif;
-    font-weight: 700;
-    font-size: 30px;
-    text-align: center;
-    color: #081222;
-    margin-top: 40px;
-}
