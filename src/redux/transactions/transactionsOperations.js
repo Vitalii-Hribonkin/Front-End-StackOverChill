@@ -1,45 +1,61 @@
-import { createAsyncThunk } from '@reduxjs/toolkit';
-import { api } from '../../services/api';
-import toast from 'react-hot-toast';
-import { getUser } from '../user/userOperations';
+import { createSlice } from "@reduxjs/toolkit";
+import {
+  fetchTransactions,
+  createTransaction,
+  deleteTransaction,
+} from "./transactionsOperations";
 
-export const fetchTransactions = createAsyncThunk(
-  'transactions/fetchAll',
-  async (_, thunkAPI) => {
-    try {
-      const { data } = await api.get('/transactions');
-      return data.data;
-    } catch (error) {
-      toast.error(error.message);
-      return thunkAPI.rejectWithValue(error.message);
-    }
-  }
-);
+const initialState = {
+  items: [],
+  isLoading: false,
+  error: null,
+};
 
-export const createTransaction = createAsyncThunk(
-  'transactions/create',
-  async (transactionData, thunkAPI) => {
-    try {
-      const { data } = await api.post('/transactions', transactionData);
-      thunkAPI.dispatch(getUser());
-      return data.data;
-    } catch (error) {
-      toast.error(error.message);
-      return thunkAPI.rejectWithValue(error.message);
-    }
-  }
-);
+const transactionsSlice = createSlice({
+  name: "transactions",
+  initialState,
+  reducers: {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchTransactions.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(fetchTransactions.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.items = action.payload;
+      })
+      .addCase(fetchTransactions.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      })
+      .addCase(createTransaction.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(createTransaction.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.items.push(action.payload);
+      })
+      .addCase(createTransaction.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      })
+      .addCase(deleteTransaction.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(deleteTransaction.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.items = state.items.filter(
+          (item) => item._id !== action.payload.transactionId 
+        );
+      })
+      .addCase(deleteTransaction.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      });
+  },
+});
 
-export const deleteTransaction = createAsyncThunk(
-  'transactions/delete',
-  async (transactionId, thunkAPI) => {
-    try {
-      const { data } = await api.delete(`/transactions/${transactionId}`);
-      thunkAPI.dispatch(getUser());
-      return data.data;
-    } catch (error) {
-      toast.error(error.message);
-      return thunkAPI.rejectWithValue(error.message);
-    }
-  }
-);
+export default transactionsSlice.reducer;
