@@ -1,36 +1,37 @@
-import ButtonAddTransaction from "../../components/transactions/ButtonAddTransaction/ButtonAddTransaction"
-import ModalAddTransaction from "../../components/transactions/ModalAddTransaction/ModalAddTransaction"
-import TransactionsList from "../../components/transactions/TransactionsList/TransactionsList"
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  fetchTransactions,
+} from "../../redux/transactions/transactionsOperations";
+import {
+  selectTransactions,
+  selectIsLoading,
+  selectError,
+} from "../../redux/transactions/transactionsSelectors";
+import { fetchCategories } from "../../redux/categories/categoriesOperations";
 
+import ButtonAddTransaction from "../../components/transactions/ButtonAddTransaction/ButtonAddTransaction";
+import TransactionsList from "../../components/transactions/TransactionsList/TransactionsList";
 
 const HomeTab = () => {
-  const transactions = [
-    {
-      id: '1',
-      date: '2024-04-27',
-      type: '+',
-      category: 'Food',
-      comment: 'Lunch',
-      sum: 150,
-    },
-    {
-      id: '2',
-      date: '2024-04-26',
-      type: '-',
-      category: 'Transport',
-      comment: 'Bus ticket',
-      sum: 50,
-    },
-  ];
+  const dispatch = useDispatch();
+  const transactions = useSelector(selectTransactions);
+  const isLoading = useSelector(selectIsLoading);
+  const error = useSelector(selectError);
+
+  useEffect(() => {
+    dispatch(fetchTransactions());
+    dispatch(fetchCategories());
+  }, [dispatch]);
+
   return (
     <>
+      {isLoading && <p>Loading...</p>}
+      {error && <p>Error: {error}</p>}
       <TransactionsList transactions={transactions} />
       <ButtonAddTransaction />
-      {/* <ModalAddTransaction /> */}
-
-
     </>
-  )
-}
+  );
+};
 
-export default HomeTab
+export default HomeTab;

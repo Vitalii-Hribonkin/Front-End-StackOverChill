@@ -1,13 +1,23 @@
-
+import { useState } from "react";
+import ModalAddTransaction from "../ModalAddTransaction/ModalAddTransaction";
+import s from "./ButtonAddTransaction.module.css";
 
 const ButtonAddTransaction = () => {
-  return (
-      <>
-      
-          <button>Open the modal btn</button>
-          
-      </>
-  )
-}
+  const [showModal, setShowModal] = useState(false);
 
-export default ButtonAddTransaction
+  const toggleModal = () => setShowModal(prev => !prev);
+
+  return (
+    <>
+      <button className={s.btn} onClick={toggleModal}>
+        <svg className={s.svg} width="25" height="25">
+          <use href="/icons.svg#plus"></use>
+        </svg>
+      </button>
+
+      {showModal && <ModalAddTransaction onClose={toggleModal} />}
+    </>
+  );
+};
+
+export default ButtonAddTransaction;

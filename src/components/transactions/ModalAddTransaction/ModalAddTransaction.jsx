@@ -1,14 +1,48 @@
-import AddTransactionForm from "../AddTransactionForm/AddTransactionForm"
+import { useEffect } from 'react';
+import s from './ModalAddTransaction.module.css';
+import AddTransactionForm from '../AddTransactionForm/AddTransactionForm';
+import { useMediaQuery } from 'react-responsive';
 
+const ModalAddTransaction = ({ onClose }) => {
+  useEffect(() => {
+    const handleKey = (e) => {
+      if (e.key === 'Escape') {
+        onClose();
+      }
+    };
 
-const ModalAddTransaction = () => {
+    window.addEventListener('keydown', handleKey);
+    return () => window.removeEventListener('keydown', handleKey);
+  }, []);
+
+  const handleClose = (e) => {
+    if (e.target === e.currentTarget) {
+      onClose();
+    }
+  };
+
+  const isTab = useMediaQuery({
+    query: '(min-width: 768px)',
+  });
+
   return (
-    <>
-      
-      <AddTransactionForm/>
+    <div className={s.backdrop} onClick={handleClose}>
+      <div className={s.modal}>
+        <button type="button" className={s.closeBtn} onClick={onClose}>
+          {isTab ? (
+            <svg width="18" height="18" className={s.icon}>
+              <use href="/icons.svg#close"></use>
+            </svg>
+          ) : (
+            <svg width="20" height="20" className={s.icon}>
+              <use href="/icons.svg#close-1"></use>
+            </svg>
+          )}
+        </button>
+        <AddTransactionForm onClose={onClose} />
+      </div>
+    </div>
+  );
+};
 
-    </>
-  )
-}
-
-export default ModalAddTransaction
+export default ModalAddTransaction;
