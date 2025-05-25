@@ -26,7 +26,6 @@ const HomeTab = () => {
     <>
       <TransactionsList transactions={transactions} />
       <ButtonAddTransaction />
-      {/* <ModalAddTransaction /> */}
 
 
     </>
