@@ -1,9 +1,12 @@
-import React from 'react'
+import LoginForm from '../../components/LoginForm/LoginForm';
+import s from './LoginPage.module.css';
 
 const LoginPage = () => {
   return (
-    <div>LoginPage</div>
-  )
-}
+    <div className={s.img}>
+      <LoginForm />
+    </div>
+  );
+};
 
-export default LoginPage
+export default LoginPage;

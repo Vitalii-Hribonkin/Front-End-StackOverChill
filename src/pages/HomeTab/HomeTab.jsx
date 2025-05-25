@@ -1,14 +1,15 @@
 import { useDispatch, useSelector } from "react-redux";
-
-import ButtonAddTransaction from "../../components/transactions/ButtonAddTransaction/ButtonAddTransaction"
-import ModalAddTransaction from "../../components/transactions/ModalAddTransaction/ModalAddTransaction"
-import TransactionsList from "../../components/transactions/TransactionsList/TransactionsList"
-import { selectError, selectIsLoading, selectTransactions } from "../../redux/transactions/transactionsSelectors";
-// import { selectCategories } from "../../redux/categories/categoriesSelectors";
 import { useEffect, useState } from "react";
-import { fetchTransactions } from "../../redux/transactions/transactionsOperations";
-// import { fetchCategories } from "../../redux/categories/categoriesSelectors"
+
+import ButtonAddTransaction from "../../components/transactions/ButtonAddTransaction/ButtonAddTransaction";
+import ModalAddTransaction from "../../components/transactions/ModalAddTransaction/ModalAddTransaction";
+import TransactionsList from "../../components/transactions/TransactionsList/TransactionsList";
 import Loader from "../../components/Loader/Loader";
+
+import { selectError, selectIsLoading, selectTransactions } from "../../redux/transactions/transactionsSelectors";
+import { selectCategories } from "../../redux/categories/categoriesSelectors";
+import { fetchTransactions } from "../../redux/transactions/transactionsOperations";
+import { fetchCategories } from "../../redux/categories/categoriesOperations";
 
 const HomeTab = () => {
   const dispatch = useDispatch();
@@ -44,7 +45,7 @@ const HomeTab = () => {
 
       {isModalOpen && <ModalAddTransaction onClose={handleCloseModal} />}
     </>
-  )
-}
+  );
+};
 
 export default HomeTab;
