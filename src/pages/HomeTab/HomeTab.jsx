@@ -1,45 +1,35 @@
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import ButtonAddTransaction from "../../components/transactions/ButtonAddTransaction/ButtonAddTransaction"
+import ModalAddTransaction from "../../components/transactions/ModalAddTransaction/ModalAddTransaction"
+import TransactionsList from "../../components/transactions/TransactionsList/TransactionsList"
 
-import ButtonAddTransaction from "../../components/transactions/ButtonAddTransaction/ButtonAddTransaction";
-import ModalAddTransaction from "../../components/transactions/ModalAddTransaction/ModalAddTransaction";
-import TransactionsList from "../../components/transactions/TransactionsList/TransactionsList";
-
-import { selectTransactions } from "../../redux/transactions/transactionsSelectors";
-import { selectCategories } from "../../redux/categories/categoriesSelectors";
-import { fetchTransactions } from "../../redux/transactions/transactionsOperations";
-import { fetchCategories } from "../../redux/categories/categoriesOperations";
 
 const HomeTab = () => {
-  const dispatch = useDispatch();
-
-  const transactions = useSelector(selectTransactions);
-  const categories = useSelector(selectCategories);
-
-  const [isModalOpen, setModalOpen] = useState(false);
-
-  useEffect(() => {
-    dispatch(fetchTransactions());
-    dispatch(fetchCategories());
-  }, [dispatch]);
-
-  const handleOpenModal = () => {
-    setModalOpen(true);
-  };
-
-  const handleCloseModal = () => {
-    setModalOpen(false);
-  };
-
+  const transactions = [
+    {
+      id: '1',
+      date: '2024-04-27',
+      type: '+',
+      category: 'Food',
+      comment: 'Lunch',
+      sum: 150,
+    },
+    {
+      id: '2',
+      date: '2024-04-26',
+      type: '-',
+      category: 'Transport',
+      comment: 'Bus ticket',
+      sum: 50,
+    },
+  ];
   return (
     <>
-      <TransactionsList transactions={transactions} categories={categories} />
+      <TransactionsList transactions={transactions} />
+      <ButtonAddTransaction />
 
-      <ButtonAddTransaction onClick={handleOpenModal} />
 
-      {isModalOpen && <ModalAddTransaction onClose={handleCloseModal} />}
     </>
-  );
-};
+  )
+}
 
-export default HomeTab;
+export default HomeTab
