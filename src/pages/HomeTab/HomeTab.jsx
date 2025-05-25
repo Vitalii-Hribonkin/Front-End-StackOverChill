@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import ButtonAddTransaction from "../../components/transactions/ButtonAddTransaction/ButtonAddTransaction";
 import ModalAddTransaction from "../../components/transactions/ModalAddTransaction/ModalAddTransaction";
 import TransactionsList from "../../components/transactions/TransactionsList/TransactionsList";
-import Loader from "../../components/Loader/Loader";
 
 import { selectTransactions } from "../../redux/transactions/transactionsSelectors";
 import { selectCategories } from "../../redux/categories/categoriesSelectors";

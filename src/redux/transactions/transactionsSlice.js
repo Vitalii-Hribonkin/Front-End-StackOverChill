@@ -35,7 +35,7 @@ const transactionsSlice = createSlice({
       })
       .addCase(createTransaction.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.items.push(action.payload);
+        state.items.push(action.payload); 
       })
       .addCase(createTransaction.rejected, (state, action) => {
         state.isLoading = false;
@@ -48,7 +48,7 @@ const transactionsSlice = createSlice({
       .addCase(deleteTransaction.fulfilled, (state, action) => {
         state.isLoading = false;
         state.items = state.items.filter(
-          (item) => item._id !== action.payload.transactionId
+          (item) => item._id !== action.payload.transactionId 
         );
       })
       .addCase(deleteTransaction.rejected, (state, action) => {
