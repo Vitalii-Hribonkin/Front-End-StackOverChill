@@ -3,13 +3,16 @@ import ModalEditTransaction from "../ModalEditTransaction/ModalEditTransaction";
 import ModalConfirmDelete from "../ModalConfirmDelete/ModalConfirmDelete";
 import { useState } from 'react';
 import s from "./TransactionsItem.module.css";
+import { useDispatch } from "react-redux"; 
+import { deleteTransaction } from "../../../redux/transactions/transactionsOperations"; 
 
-const TransactionsItem = ({ transaction, index, onDelete }) => {
+const TransactionsItem = ({ transaction, index }) => {
+  const dispatch = useDispatch(); 
 
   const [showEdit, setShowEdit] = useState(false);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
 
-  const { date, type, category, comment, sum, id } = transaction;
+  const { date, type, category, comment, sum, _id } = transaction;
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -20,16 +23,19 @@ const TransactionsItem = ({ transaction, index, onDelete }) => {
   };
 
   const formatSum = (sum) => {
-    return sum.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    return sum.toLocaleString('en-US', {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
+    });
   };
 
   const rowClass = index % 2 === 0 ? s.evenRow : s.oddRow;
 
   const handleDelete = () => {
-    fetch(`/api/transactions/${id}`, { method: 'DELETE' })
+    dispatch(deleteTransaction(_id))
+      .unwrap()
       .then(() => {
         toast.success(`Successfully deleted!`);
-        if (onDelete) onDelete(id);
         setShowDeleteConfirm(false);
       })
       .catch(() => {
@@ -99,32 +105,22 @@ const TransactionsItem = ({ transaction, index, onDelete }) => {
         </div>
       </div>
 
-
       {showDeleteConfirm && (
-        <div>
-          <ModalConfirmDelete
-            onConfirm={handleDelete}
-            onCancel={() => setShowDeleteConfirm(false)}
-            onClose={() => setShowDeleteConfirm(false)}
-          />
-        </div>
-      )
-      }
+        <ModalConfirmDelete
+          onConfirm={handleDelete}
+          onCancel={() => setShowDeleteConfirm(false)}
+          onClose={() => setShowDeleteConfirm(false)}
+        />
+      )}
 
       {showEdit && (
         <ModalEditTransaction
           transaction={transaction}
           onClose={() => setShowEdit(false)}
         />
-      )
-      }
+      )}
     </div>
   );
 };
 
 export default TransactionsItem;
-
-
-
-
-
