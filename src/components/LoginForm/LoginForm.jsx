@@ -30,7 +30,7 @@ const LoginForm = () => {
   const handleSubmit = (values, actions) => {
     dispatch(login(values))
       .unwrap()
-      .then(() => navigate('/statistics', { replace: true }))
+      .then(() => navigate('/', { replace: true }))
       .catch(error => toast.error(error.message || 'Invalid data'));
     // actions.resetForm();
   };

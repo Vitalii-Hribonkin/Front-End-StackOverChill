@@ -4,11 +4,11 @@ import { fetchCategories } from './categoriesOperations';
 const initialState = {
   items: [],
   error: null,
+  isIncome: false,
 };
 
 const categoriesSlice = createSlice({
   name: 'categories',
-  isIncome: false,
   initialState,
   reducers: {
     setIsIncome(state, action) {

@@ -64,6 +64,7 @@ const SelectComponent = ({ categories, values, setFieldValue }) => {
       ...base,
       margin: 0,
       color: '#081222',
+      fontSize: '18px',
     }),
     input: (base) => ({
       ...base,
@@ -94,10 +95,10 @@ const SelectComponent = ({ categories, values, setFieldValue }) => {
     <Select
       styles={customStyles}
       placeholder={'Choose category'}
-      value={[...options].find((option) => option.value === values.category )}
-      onChange={(option) => setFieldValue('category', option.label)}
+      value={[...options].find((option) => option.value === values.categoryId )}
+      onChange={(option) => setFieldValue('categoryId', option.label)}
       components={{ DropdownIndicator: CustomDropdownIndicator }}
-      name='category'
+      name='categoryId'
       options={options}
     />
   );

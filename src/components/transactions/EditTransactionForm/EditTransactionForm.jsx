@@ -17,28 +17,31 @@ import {
 import { fetchCategories } from '../../../redux/categories/categoriesOperations';
 import clsx from 'clsx';
 
+
 const EditTransactionForm = ({ transaction, onClose }) => {
   const dispatch = useDispatch();
   const categories = useSelector(SelectCategories);
   const isIncome = useSelector(selectIsIncome);
-  const { date, amount, category, comment, categoryId } = transaction;
+  const { date, amount, category, comment, categoryId, _id } = transaction;
 
   useEffect(() => {
-    if (category.type === 'income') {
-      dispatch(setIsIncome(true));
-    } else {
-      dispatch(setIsIncome(false));
-    }
+    if (!category) return;
+
+    const incomeFlag = category.type === 'income';
+    dispatch(setIsIncome(incomeFlag));
+    dispatch(fetchCategories(incomeFlag));
   }, [dispatch, category]);
 
-  useEffect(() => {
-    dispatch(fetchCategories(isIncome));
-  }, [dispatch, isIncome]);
+  const handleToggle = () => {
+    const newIsIncome = !isIncome;
+    dispatch(toggleIsIncome());
+    dispatch(fetchCategories(newIsIncome));
+  };
 
   const initialValues = {
     date,
     amount,
-    category: categoryId,
+    categoryId,
     comment,
   };
 
@@ -49,13 +52,17 @@ const EditTransactionForm = ({ transaction, onClose }) => {
     return `${year}-${month}-${day}`;
   }
 
-  const handleSubmit = (values, actions) => {
-    const category = categories.find((item) => item.name === values.category);
+  const handleSubmit = async (values, actions) => {
+    const category = categories.find((item) => item.name === values.categoryId);
+
     const data = {
       ...values,
-      date: (values.date !== initialValues.date) ? formatDate(values.date) : initialValues.date,
+      date:
+        values.date !== initialValues.date
+          ? formatDate(values.date)
+          : initialValues.date,
       amount: Number(values.amount),
-      category: category ? category._id : initialValues.category,
+      categoryId: category ? category._id : initialValues.categoryId,
     };
 
     const changedFields = {};
@@ -65,7 +72,15 @@ const EditTransactionForm = ({ transaction, onClose }) => {
       }
     }
 
-    console.log(changedFields);
+    // dispatch(
+    //   editTransaction({
+    //     _id,
+    //     ...changedFields,
+    //     categoryId: data.categoryId,
+    //     amount: data.amount,
+    //   }),
+    // );
+    onClose();
   };
 
   const FeedbackSchema = Yup.object().shape({
@@ -77,12 +92,13 @@ const EditTransactionForm = ({ transaction, onClose }) => {
       .required('Required')
       .min(0.01, 'The amount must be greater than 0')
       .max(1000000, 'The amount cannot exceed 1 000 000')
-    .test(
-      'max-decimals',
-      'Example: 650.00',
-      value => value === undefined || /^\d+(\.\d{1,2})?$/.test(value.toString())
-    ),
-    category: Yup.string().required(),
+      .test(
+        'max-decimals',
+        'Example: 650.00',
+        (value) =>
+          value === undefined || /^\d+(\.\d{1,2})?$/.test(value.toString()),
+      ),
+    categoryId: Yup.string().required(),
     comment: Yup.string()
       .min(2, 'Comment must contain at least 2 characters')
       .max(192, 'The comment must not exceed 192 characters'),
@@ -91,11 +107,7 @@ const EditTransactionForm = ({ transaction, onClose }) => {
   return (
     <>
       <p className={s.title}>Edit transaction</p>
-      <TypeButton
-        onClick={() => dispatch(toggleIsIncome())}
-        income={isIncome}
-        isEdit={true}
-      />
+      <TypeButton onClick={handleToggle} income={isIncome} isEdit={true} />
 
       <Formik
         onSubmit={handleSubmit}
@@ -118,20 +130,26 @@ const EditTransactionForm = ({ transaction, onClose }) => {
                 />
               </label>
             )}
-            <label className={s.label}>
-              <Field className={s.input} type='text' name='amount' />
-              <ErrorMessage
-                className={s.error}
-                name='amount'
-                component='span'
-              />
-            </label>
-            <div className={s.label}>
-              <DatePickerComponent
-                values={values}
-                setFieldValue={setFieldValue}
-              />
-              <ErrorMessage className={s.error} name='date' component='span' />
+            <div className={s.wrapper}>
+              <label className={s.label}>
+                <Field className={s.input} type='text' name='amount' />
+                <ErrorMessage
+                  className={s.error}
+                  name='amount'
+                  component='span'
+                />
+              </label>
+              <div className={s.label}>
+                <DatePickerComponent
+                  values={values}
+                  setFieldValue={setFieldValue}
+                />
+                <ErrorMessage
+                  className={s.error}
+                  name='date'
+                  component='span'
+                />
+              </div>
             </div>
             <label className={s.label}>
               <Field className={s.input} type='text' name='comment' />
@@ -142,16 +160,18 @@ const EditTransactionForm = ({ transaction, onClose }) => {
               />
             </label>
 
-            <button type='submit' className={clsx(s.btn, s.submit)}>
-              Save
-            </button>
-            <button
-              type='button'
-              className={clsx(s.btn, s.cancel)}
-              onClick={onClose}
-            >
-              Cancel
-            </button>
+            <div className={s.btnContainer}>
+              <button type='submit' className={clsx(s.btn, s.submit)}>
+                Save
+              </button>
+              <button
+                type='button'
+                className={clsx(s.btn, s.cancel)}
+                onClick={onClose}
+              >
+                Cancel
+              </button>
+            </div>
           </Form>
         )}
       </Formik>

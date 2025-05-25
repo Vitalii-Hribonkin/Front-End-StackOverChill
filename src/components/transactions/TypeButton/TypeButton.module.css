@@ -59,3 +59,42 @@
   height: 3px;
   background-color: var(--text-white);
 }
+
+@media screen and (min-width: 768px) {
+  .typeContainer {
+    justify-content: center;
+    gap: 24px;
+    margin-bottom: 34px;
+  }
+
+  .typeBtn {
+    width: 80px;
+  }
+
+  .circle {
+    width: 44px;
+    height: 44px;
+    border-radius: 100%;
+    background-color: var(--bg-dfad3f);
+  }
+
+  .red {
+    width: 44px;
+    height: 44px;
+    border-radius: 100%;
+    background-color: var(--bg-b20202);
+  }
+
+  .plus {
+    stroke: var(--text-white);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  .minus {
+    width: 20px;
+    height: 2px;
+  }
+}
