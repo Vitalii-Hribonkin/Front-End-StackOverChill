@@ -9,6 +9,7 @@ const TransactionsList = ({ transactions }) => {
 
   return (
     <>
+    <div className={s.cont}>
       <div className={s.header}>
         <span className={s.dateHeader}>Date</span>
         <span className={s.typeHeader}>Type</span>
@@ -25,6 +26,8 @@ const TransactionsList = ({ transactions }) => {
           />
         ))}
       </div>
+    </div>
+      
     </>
   );
 };
