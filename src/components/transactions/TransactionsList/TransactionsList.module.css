@@ -9,6 +9,14 @@
     transform: translate(-50%,-50%);
 }
 
+.list {
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  overflow-x: hidden;
+  gap: 16px;
+}
+
 @media screen and (min-width: 768px) {
 
   .header {
@@ -21,10 +29,7 @@
   }
 
   .list {
-    display: flex;
-    flex-direction: column;
-    overflow-y: auto;
-    overflow-x: hidden;
+    gap: 16px;
   }
 
   ::-webkit-scrollbar {
