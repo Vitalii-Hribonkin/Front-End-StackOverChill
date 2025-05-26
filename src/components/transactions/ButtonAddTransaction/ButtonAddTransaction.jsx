@@ -1,11 +1,17 @@
 import { useState } from "react";
 import ModalAddTransaction from "../ModalAddTransaction/ModalAddTransaction";
 import s from "./ButtonAddTransaction.module.css";
+import { useDispatch } from "react-redux";
+import { setIsIncome } from "../../../redux/categories/categoriesSlice";
 
 const ButtonAddTransaction = () => {
   const [showModal, setShowModal] = useState(false);
+  const dispatch = useDispatch();
 
-  const toggleModal = () => setShowModal(prev => !prev);
+  const toggleModal = () => {
+    dispatch(setIsIncome(false));
+    setShowModal(prev => !prev);
+  }
 
   return (
     <>
