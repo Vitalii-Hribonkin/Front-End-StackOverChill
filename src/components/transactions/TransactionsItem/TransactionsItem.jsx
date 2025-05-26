@@ -30,6 +30,8 @@ const TransactionsItem = ({ transaction, index }) => {
   };
 
   const rowClass = index % 2 === 0 ? s.evenRow : s.oddRow;
+  const isIncome = category.type === 'income';
+  const transactionTypeClass = isIncome ? s.income : s.expense;
 
   const handleDelete = () => {
     dispatch(deleteTransaction(_id))
@@ -44,21 +46,12 @@ const TransactionsItem = ({ transaction, index }) => {
   };
 
   return (
-    <div
-      className={`${s.transactionWrapper} ${rowClass} ${
-        category.type === 'income' ? s.income : s.expense
-      }`}
-    >
+    <div className={`${s.transactionWrapper} ${rowClass}`}>
+      {/* Табличне представлення (десктоп) */}
       <div className={s.transactionTableRow}>
         <div className={s.date}>{formatDate(date)}</div>
-        <div
-          className={`${s.transactionCell} ${
-            category.type === 'income' || category.type === 'expense'
-              ? s.typeCell
-              : ''
-          }`}
-        >
-          {category.type === 'income' ? '+' : '-'}
+        <div className={`${s.transactionCell} ${s.typeCell}`}>
+          {isIncome ? '+' : '-'}
         </div>
         <div className={s.category}>{category.name}</div>
         <div className={s.comment}>{comment}</div>
@@ -81,15 +74,16 @@ const TransactionsItem = ({ transaction, index }) => {
         </div>
       </div>
 
-      <div className={s.transactionCard}>
+      {/* Мобільне представлення (з кольоровою смужкою) */}
+      <div className={`${s.transactionCard} ${transactionTypeClass}`}>
         <div className={s.mobileView}>
           <div className={s.mobileField}>
             <span className={s.fieldName}>Date</span>
-            <span className={s.fieldValue}>{date}</span>
+            <span className={s.fieldValue}>{formatDate(date)}</span>
           </div>
           <div className={s.mobileField}>
             <span className={s.fieldName}>Type</span>
-            <span className={s.fieldValue}>{category.type === 'income' ? '+' : '-'}</span>
+            <span className={s.fieldValue}>{isIncome ? '+' : '-'}</span>
           </div>
           <div className={s.mobileField}>
             <span className={s.fieldName}>Category</span>
@@ -101,11 +95,7 @@ const TransactionsItem = ({ transaction, index }) => {
           </div>
           <div className={s.mobileField}>
             <span className={s.fieldName}>Sum</span>
-            <span
-              className={`${s.fieldValue} ${
-                category.type === 'income' ? s.sumPositive : s.sumNegative
-              }`}
-            >
+            <span className={`${s.fieldValue} ${isIncome ? s.sumPositive : s.sumNegative}`}>
               {amount.toLocaleString()}
             </span>
           </div>
@@ -131,6 +121,7 @@ const TransactionsItem = ({ transaction, index }) => {
         </div>
       </div>
 
+      {/* Модалки */}
       {showDeleteConfirm && (
         <ModalConfirmDelete
           onConfirm={handleDelete}

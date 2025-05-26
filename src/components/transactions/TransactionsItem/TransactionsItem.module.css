@@ -1,23 +1,40 @@
 .transactionCard {
+    position: relative;
     border-radius: 10px;
-    margin-bottom: 16px;
     display: flex;
     flex-direction: column;
     gap: 8px;
     background: linear-gradient(180deg, #355359 0%, #3b5d63 100%);
+    overflow: hidden;
 }
+
+.transactionCard::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 6px;
+    border-radius: 10px 0 0 10px;
+    background-color: var(--stripe-color, red);
+    /* red fallback for debug */
+}
+
+/* правильне розміщення змінних */
+.transactionCard.income {
+    --stripe-color: #24cca7;
+}
+
+.transactionCard.expense {
+    --stripe-color: #dfad3f; }
+
+
 
 .transactionTableRow {
     display: none;
 }
 
-.income {
-    border-left: 6px solid #24cca7;
-}
 
-.expense {
-    border-left: 6px solid #dfad3f;
-}
 
 .mobileField {
     display: flex;
@@ -117,6 +134,9 @@
     .transactionCard {
         display: none;
     }
+        .transactionCard::before {
+            display: none;
+        }
 
     .income {
         border-left: none;
@@ -207,7 +227,6 @@
 
     .oddRow {
         background: linear-gradient(180deg, #294045 0%, #1e2f33 100%);
-        margin-bottom: 16px;
     }
 
 }
@@ -235,6 +254,9 @@
     .transactionCard {
         display: none;
     }
+        .transactionCard::before {
+            display: none;
+        }
 
     .income {
         border-left: none;
@@ -320,7 +342,6 @@
 
     .oddRow {
         background: linear-gradient(180deg, #294045 0%, #1e2f33 100%);
-        margin-bottom: 16px;
     }
 
     .confirmDialog {
