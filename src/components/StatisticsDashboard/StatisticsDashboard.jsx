@@ -37,7 +37,7 @@ const StatisticsDashboard = () => {
     query: "(min-width: 1280px)",
   });
   const [formValues, setFormValues] = useState({
-    month: monthOptions[5],
+    month: monthOptions[4],
     year: yearOptions[0],
   });
   const customSelectStyles = {

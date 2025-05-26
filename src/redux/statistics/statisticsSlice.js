@@ -10,6 +10,7 @@ const initialState = {
   },
   isLoading: false,
   error: null,
+  isIncome: true,
 };
 
 const statisticsSlice = createSlice({
@@ -17,6 +18,9 @@ const statisticsSlice = createSlice({
   initialState,
   reducers: {
     clearStatistics: () => initialState,
+    toggleIsIncome(state) {
+      state.isIncome = !state.isIncome;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -36,5 +40,5 @@ const statisticsSlice = createSlice({
   },
 });
 
-export const { clearStatistics } = statisticsSlice.actions;
+export const { clearStatistics, toggleIsIncome } = statisticsSlice.actions;
 export default statisticsSlice.reducer;

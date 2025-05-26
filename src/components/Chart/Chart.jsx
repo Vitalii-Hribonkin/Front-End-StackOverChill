@@ -1,6 +1,9 @@
 import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
 import s from "./Chart.module.css";
-import { selectStatistics } from "../../redux/statistics/statisticsSelectors";
+import {
+  selectStatistics,
+  selectStatisticsIsIncome,
+} from "../../redux/statistics/statisticsSelectors";
 import { useSelector } from "react-redux";
 
 const data = [
@@ -13,8 +16,10 @@ const COLORS = ["#50D1A2", "#FCD7D8", "#D4A03A"];
 
 const Chart = () => {
   const statistics = useSelector(selectStatistics);
+  const isIncome = useSelector(selectStatisticsIsIncome);
   // const total = data.reduce((acc, cur) => acc + cur.value, 0);
-  const total = statistics.totalExpense;
+
+  const total = isIncome ? statistics.totalIncome : statistics.totalExpense;
   return (
     <div className={s.chartContainer}>
       <ResponsiveContainer width="100%" height="100%" className={s.chartSvg}>

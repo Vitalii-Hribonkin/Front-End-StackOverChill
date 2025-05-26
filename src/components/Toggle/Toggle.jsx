@@ -1,8 +1,11 @@
+import { useDispatch } from "react-redux";
+import { toggleIsIncome } from "../../redux/statistics/statisticsSlice";
 import s from "./Toggle.module.css";
 import { useState } from "react";
 
 const Toggle = () => {
-  const [values, setFieldValue] = useState("income");
+  const dispatch = useDispatch();
+  // const [values, setFieldValue] = useState("income");
   return (
     <div className={s.toggleGroup}>
       <span className={s.span}>Income</span>
@@ -11,11 +14,13 @@ const Toggle = () => {
           type="checkbox"
           className={s.toggleInput}
           //   checked={values.type === "expense"}
-          onChange={() =>
-            setFieldValue(
-              "type",
-              values.type === "income" ? "expense" : "income"
-            )
+          onChange={
+            () => dispatch(toggleIsIncome())
+            // setFieldValue(
+
+            // "type",
+            // values.type === "income" ? "expense" : "income"
+            // )
           }
         />
         <span className={s.toggleSlider}></span>
