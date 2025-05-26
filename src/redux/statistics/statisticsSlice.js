@@ -4,7 +4,7 @@ import { getStatistics } from "./statisticsOperations";
 const initialState = {
   statisticsInfo: {
     expense: [],
-    income: {},
+    income: [],
     totalExpense: 0,
     totalIncome: 0,
   },
@@ -29,7 +29,7 @@ const statisticsSlice = createSlice({
         state.isLoading = false;
         state.error = null;
       })
-      .addCase(getStatistics.pending, (state, action) => {
+      .addCase(getStatistics.pending, (state) => {
         state.isLoading = true;
         state.error = null;
       })
