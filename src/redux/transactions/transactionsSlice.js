@@ -37,7 +37,7 @@ const transactionsSlice = createSlice({
       .addCase(createTransaction.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
-        state.items.push({... action.payload.transaction, category: action.payload.category });
+        state.items = [({... action.payload.transaction, category: action.payload.category }), ...state.items];
       })
       .addCase(createTransaction.rejected, (state, action) => {
         state.isLoading = false;
