@@ -12,6 +12,7 @@ const StatisticsTab = () => {
       </div>
       <div>
         <StatisticsDashboard />
+        <div><div/>
       </div>
     </div>
   );
