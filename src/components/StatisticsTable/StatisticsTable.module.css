@@ -55,7 +55,6 @@
   border-radius: 2px;
   width: 24px;
   height: 24px;
-  background-color: aqua;
 }
 
 .expenses {
@@ -68,6 +67,10 @@
 
 .expense {
   color: var(--bg-f23a3a);
+}
+
+.income {
+  color: #24cca7;
 }
 
 @media screen and (min-width: 768px) {

@@ -10,7 +10,7 @@ const initialState = {
   },
   isLoading: false,
   error: null,
-  isIncome: true,
+  isIncome: false,
 };
 
 const statisticsSlice = createSlice({

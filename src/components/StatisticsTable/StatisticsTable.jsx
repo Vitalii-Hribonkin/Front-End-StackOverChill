@@ -1,7 +1,16 @@
+import { useSelector } from 'react-redux';
 import s from './StatisticsTable.module.css';
+import { selectStatisticsIsIncome } from '../../redux/statistics/statisticsSelectors';
 
-const StatisticsTable = () => {
+const formatSum = (sum) => {
+  return sum.toLocaleString('en-US', {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  });
+};
 
+const StatisticsTable = ({ data, colors, total }) => {
+  const isIncome = useSelector(selectStatisticsIsIncome);
 
   return (
     <>
@@ -10,29 +19,27 @@ const StatisticsTable = () => {
         <p>Sum</p>
       </ul>
       <ul className={s.list}>
-        <li className={s.item}>
-          <div className={s.pieColor}></div>
-          <div className={s.itemWrapper}>
-            <p>Category</p>
-            <p>Amount</p>
-          </div>
-        </li>
-        <li className={s.item}>
-          <div className={s.pieColor}></div>
-          <div className={s.itemWrapper}>
-            <p>Category</p>
-            <p>Amount</p>
-          </div>
-        </li>
-        <li className={s.item}>
-          <div className={s.pieColor}></div>
-          <div className={s.itemWrapper}>
-            <p>Category</p>
-            <p>Amount</p>
-          </div>
-        </li>
+        {data.map((item, i) => (
+          <li className={s.item} key={colors[i]}>
+            <div
+              className={s.pieColor}
+              style={{
+                backgroundColor: colors[i],
+              }}
+            ></div>
+            <div className={s.itemWrapper}>
+              <p>{item.name}</p>
+              <p>{formatSum(item.sum).replace(',', ' ')}</p>
+            </div>
+          </li>
+        ))}
       </ul>
-      <p className={s.expenses}>Expenses:<span className={s.expense}>14000</span></p>
+      <p className={s.expenses}>
+        {isIncome ? 'Incomes:' : 'Expenses:'}{' '}
+        <span className={isIncome ? s.income : s.expense}>
+          {formatSum(total).replace(',', ' ')}
+        </span>
+      </p>
     </>
   );
 };
