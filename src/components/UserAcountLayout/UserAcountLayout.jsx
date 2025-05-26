@@ -6,8 +6,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getUser } from '../../redux/user/userOperations';
 import { selectIsRefreshing } from '../../redux/auth/authSelectors';
 import clsx from 'clsx';
-import { selectError, selectIsLoading } from '../../redux/transactions/transactionsSelectors';
-import s from './UserAcountLayout.module.css'
+import {
+  selectError,
+  selectIsLoading,
+} from '../../redux/transactions/transactionsSelectors';
+import s from './UserAcountLayout.module.css';
 import Loader from '../Loader/Loader';
 
 const UserAcountLayout = ({ children }) => {
@@ -23,7 +26,7 @@ const UserAcountLayout = ({ children }) => {
   return (
     <>
       <Header />
-      <div className={clsx('container', s.layoutContainer)}>
+      <div className={clsx(s.layoutContainer, 'container')}>
         <Sidebar />
         <Suspense fallback={null}>
           {
