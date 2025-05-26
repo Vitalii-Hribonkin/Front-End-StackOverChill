@@ -7,6 +7,7 @@ import { clearUser } from "../../redux/user/userSlice";
 import styles from './Header.module.css';
 import { logout } from '../../redux/auth/authOperations';
 import { selectUser } from '../../redux/user/userSelectors';
+import clsx from 'clsx';
 
 const Header = () => {
   const [showModal, setShowModal] = useState(false);
@@ -23,26 +24,26 @@ const Header = () => {
 
   return (
     <header className={styles.header}>
-      <div className={styles.logoBlock}>
-        <img src='/logo.svg' alt='Logo' className={styles.logo} />
+      <div className={clsx("container", styles.headerContainer)}>
+        <div className={styles.logoBlock}>
+          <img src='/logo.svg' alt='Logo' className={styles.logo} />
+        </div>
+        <div className={styles.userBlock}>
+          <span className={styles.username}>{user.name}</span>
+          <button className={styles.exitBtn} onClick={() => setShowModal(true)}>
+            <svg className={styles.icon}>
+              <use href='/icons.svg#exit' />
+            </svg>
+            Exit
+          </button>
+        </div>
+        {showModal && (
+          <LogoutModal
+            onLogout={handleLogout}
+            onCancel={() => setShowModal(false)}
+          />
+        )}
       </div>
-
-      <div className={styles.userBlock}>
-        <span className={styles.username}>{user.name}</span>
-        <button className={styles.exitBtn} onClick={() => setShowModal(true)}>
-          <svg className={styles.icon}>
-            <use href='/icons.svg#exit' />
-          </svg>
-          Exit
-        </button>
-      </div>
-
-      {showModal && (
-        <LogoutModal
-          onLogout={handleLogout}
-          onCancel={() => setShowModal(false)}
-        />
-      )}
     </header>
   );
 };
