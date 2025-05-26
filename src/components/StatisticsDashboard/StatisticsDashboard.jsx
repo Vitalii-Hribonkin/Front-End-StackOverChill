@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import StatisticsTable from "../StatisticsTable/StatisticsTable";
 import Select from "react-select";
 import s from "./StatisticsDashboard.module.css";
+import { useDispatch, useSelector } from "react-redux";
+import { getStatistics } from "../../redux/statistics/statisticsOperations";
 
 const monthOptions = [
   { value: "01", label: "January" },
@@ -71,14 +73,23 @@ const customSelectStyles = {
 };
 
 const StatisticsDashboard = () => {
+  const dispatch = useDispatch();
+
+  // useEffect(() => {
+  //   dispatch(
+  //     getStatistics(`${formValues.year.value}-${formValues.month.value}`)
+  //   );
+  // }, [dispatch]);
+
   const [formValues, setFormValues] = useState({
     month: monthOptions[5],
     year: yearOptions[0],
   });
 
   useEffect(() => {
-    console.log("Month:", formValues.month.value);
-    console.log("Year:", formValues.year.value);
+    dispatch(
+      getStatistics(`${formValues.year.value}-${formValues.month.value}`)
+    );
   }, [formValues]);
 
   return (
