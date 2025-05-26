@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import {
   fetchTransactions,
   createTransaction,
+  editTransaction,
   deleteTransaction,
 } from "./transactionsOperations";
 
@@ -31,13 +32,30 @@ const transactionsSlice = createSlice({
       })
       .addCase(createTransaction.pending, (state) => {
         state.isLoading = true;
-        state.error = null;
+        
       })
       .addCase(createTransaction.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.items.push(action.payload); 
+        state.error = null;
+        state.items.push({... action.payload.transaction, category: action.payload.category });
       })
       .addCase(createTransaction.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      })
+      .addCase(editTransaction.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(editTransaction.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.items = state.items.map((item) =>
+          item._id === action.payload.transaction._id
+            ? action.payload.transaction
+            : item,
+        );
+      })
+      .addCase(editTransaction.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload;
       })
@@ -48,7 +66,7 @@ const transactionsSlice = createSlice({
       .addCase(deleteTransaction.fulfilled, (state, action) => {
         state.isLoading = false;
         state.items = state.items.filter(
-          (item) => item._id !== action.payload.transactionId 
+          (item) => item._id !== action.payload.transactionId,
         );
       })
       .addCase(deleteTransaction.rejected, (state, action) => {

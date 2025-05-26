@@ -40,7 +40,7 @@ const LoginForm = () => {
       <div className={s.formWrapper}>
         <img
           className={s.logo}
-          src="../../../public/logo.svg"
+          src="/logo.svg"
           width={182}
           height={94}
           alt="Logo"

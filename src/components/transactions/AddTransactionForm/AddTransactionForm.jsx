@@ -1,34 +1,45 @@
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import * as Yup from 'yup';
-import s from './AddTransactionForm.module.css';
+import s from '../EditTransactionForm/EditTransactionForm.module.css';
 import { useEffect } from 'react';
 import DatePickerComponent from '../DatePickerComponent';
 import SelectComponent from '../SelectComponent';
 import TypeButton from '../TypeButton/TypeButton';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-  SelectCategories,
+  selectCategories,
   selectIsIncome,
 } from '../../../redux/categories/categoriesSelectors';
-import {
-  toggleIsIncome,
-} from '../../../redux/categories/categoriesSlice';
+import { toggleIsIncome } from '../../../redux/categories/categoriesSlice';
 import { fetchCategories } from '../../../redux/categories/categoriesOperations';
 import clsx from 'clsx';
+import { createTransaction } from '../../../redux/transactions/transactionsOperations';
+import {
+  selectError,
+  selectIsLoading,
+} from '../../../redux/transactions/transactionsSelectors';
 
 const AddTransactionForm = ({ onClose }) => {
   const dispatch = useDispatch();
-  const categories = useSelector(SelectCategories);
+  const categories = useSelector(selectCategories);
   const isIncome = useSelector(selectIsIncome);
+  const error = useSelector(selectError);
+  const isLoading = useSelector(selectIsLoading);
 
-  useEffect(() => {
-    dispatch(fetchCategories(isIncome));
-  }, [dispatch, isIncome]);
+  // useEffect(() => {
+  //   dispatch(fetchCategories(isIncome));
+  // }, [dispatch, isIncome]);
+
+  const handleToggle = () => {
+    const newIsIncome = !isIncome;
+    dispatch(toggleIsIncome());
+    dispatch(fetchCategories(newIsIncome));
+  };
 
   const initialValues = {
     date: new Date(),
     amount: '',
-    category: '',
+    categoryId: '',
     comment: '',
   };
 
@@ -40,17 +51,31 @@ const AddTransactionForm = ({ onClose }) => {
   }
 
   const handleSubmit = (values, actions) => {
-    const category = categories.find((item) => item.name === values.category);
-    const data = {
+    const category = categories.find((item) => {
+      if (item.type === 'expense') {
+        return item.name === values.categoryId;
+      }
+      return item.type === 'income';
+    });
+
+
+    const transactionData = {
       ...values,
       date: formatDate(values.date),
       amount: Number(values.amount),
-      category: category ? category._id : '',
+      categoryId: category && category._id,
+      
     };
 
-    console.log('Submitted data:', data);
-    actions.resetForm();
-    onClose();
+    console.log('Submitted data:', transactionData);
+    dispatch(createTransaction({ transactionData, category: { name: category.name, type: category.type } }))
+      .unwrap()
+      .then(() => {
+        onClose();
+      })
+      .catch((err) => {
+        console.error('Помилка при створенні транзакції:', err);
+      });
   };
 
   const ValidationSchema = Yup.object().shape({
@@ -65,9 +90,10 @@ const AddTransactionForm = ({ onClose }) => {
       .test(
         'max-decimals',
         'Example: 650.00',
-        value => value === undefined || /^\d+(\.\d{1,2})?$/.test(value.toString())
+        (value) =>
+          value === undefined || /^\d+(\.\d{1,2})?$/.test(value.toString()),
       ),
-    category: isIncome ? Yup.string() : Yup.string().required('Required'),
+    categoryId: isIncome ? Yup.string() : Yup.string().required('Required'),
     comment: Yup.string()
       .min(2, 'Comment must contain at least 2 characters')
       .max(192, 'The comment must not exceed 192 characters'),
@@ -76,11 +102,7 @@ const AddTransactionForm = ({ onClose }) => {
   return (
     <>
       <p className={s.title}>Add transaction</p>
-      <TypeButton
-        onClick={() => dispatch(toggleIsIncome())}
-        income={isIncome}
-        isEdit={false}
-      />
+      <TypeButton onClick={handleToggle} income={isIncome} isEdit={false} />
 
       <Formik
         initialValues={initialValues}
@@ -98,8 +120,8 @@ const AddTransactionForm = ({ onClose }) => {
                 />
                 <ErrorMessage
                   className={s.error}
-                  name="category"
-                  component="span"
+                  name='category'
+                  component='span'
                 />
               </label>
             )}
@@ -108,14 +130,14 @@ const AddTransactionForm = ({ onClose }) => {
               <label className={s.label}>
                 <Field
                   className={s.input}
-                  type="text"
-                  name="amount"
-                  placeholder="0.00"
+                  type='text'
+                  name='amount'
+                  placeholder='0.00'
                 />
                 <ErrorMessage
                   className={s.error}
-                  name="amount"
-                  component="span"
+                  name='amount'
+                  component='span'
                 />
               </label>
 
@@ -126,8 +148,8 @@ const AddTransactionForm = ({ onClose }) => {
                 />
                 <ErrorMessage
                   className={s.error}
-                  name="date"
-                  component="span"
+                  name='date'
+                  component='span'
                 />
               </div>
             </div>
@@ -135,23 +157,23 @@ const AddTransactionForm = ({ onClose }) => {
             <label className={s.label}>
               <Field
                 className={s.input}
-                type="text"
-                name="comment"
-                placeholder="Comment"
+                type='text'
+                name='comment'
+                placeholder='Comment'
               />
               <ErrorMessage
                 className={s.error}
-                name="comment"
-                component="span"
+                name='comment'
+                component='span'
               />
             </label>
 
             <div className={s.btnContainer}>
-              <button type="submit" className={clsx(s.btn, s.submit)}>
+              <button type='submit' className={clsx(s.btn, s.submit)}>
                 Add
               </button>
               <button
-                type="button"
+                type='button'
                 className={clsx(s.btn, s.cancel)}
                 onClick={onClose}
               >

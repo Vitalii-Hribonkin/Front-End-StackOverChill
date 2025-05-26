@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { getUser } from './userOperations';
+import { createTransaction, deleteTransaction, editTransaction } from '../transactions/transactionsOperations';
 
 const initialState = {
   userInfo: {
@@ -29,6 +30,15 @@ const userSlice = createSlice({
       })
       .addCase(getUser.rejected, (state, action) => {
         state.isLoading = false;
+      })
+      .addCase(createTransaction.fulfilled, (state, action) => {
+        state.userInfo.balance = action.payload.balance;
+      })
+      .addCase(editTransaction.fulfilled, (state, action) => {
+        state.userInfo.balance = action.payload.balance;
+      })
+      .addCase(deleteTransaction.fulfilled, (state, action) => {
+        state.userInfo.balance = action.payload.balance;
       });
   },
 });

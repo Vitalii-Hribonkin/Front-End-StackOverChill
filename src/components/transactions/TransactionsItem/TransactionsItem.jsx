@@ -12,7 +12,7 @@ const TransactionsItem = ({ transaction, index }) => {
   const [showEdit, setShowEdit] = useState(false);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
 
-  const { date, type, category, comment, sum, _id } = transaction;
+  const { date, category, comment, amount, _id } = transaction;
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -44,22 +44,39 @@ const TransactionsItem = ({ transaction, index }) => {
   };
 
   return (
-    <div className={`${s.transactionWrapper} ${rowClass} ${type === "+" ? s.income : s.expense}`}>
+    <div
+      className={`${s.transactionWrapper} ${rowClass} ${
+        category.type === 'income' ? s.income : s.expense
+      }`}
+    >
       <div className={s.transactionTableRow}>
         <div className={s.date}>{formatDate(date)}</div>
-        <div className={`${s.transactionCell} ${type === "+" || type === "-" ? s.typeCell : ""}`}>{type}</div>
-        <div className={s.category}>{category}</div>
+        <div
+          className={`${s.transactionCell} ${
+            category.type === 'income' || category.type === 'expense'
+              ? s.typeCell
+              : ''
+          }`}
+        >
+          {category.type === 'income' ? '+' : '-'}
+        </div>
+        <div className={s.category}>{category.name}</div>
         <div className={s.comment}>{comment}</div>
-        <div className={s.sum}>{formatSum(sum)}</div>
+        <div className={s.sum}>{formatSum(amount)}</div>
         <div className={s.actions}>
           <button className={s.edit} onClick={() => setShowEdit(true)}>
-            <svg className={s.svgEditIcon} width="14" height="14">
-              <use href="/icons.svg#edit"></use>
+            <svg className={s.svgEditIcon} width='14' height='14'>
+              <use href='/icons.svg#edit'></use>
             </svg>
             <span className={s.label}>Edit</span>
           </button>
           <div className={s.svgButton}>
-            <button className={s.delete} onClick={() => setShowDeleteConfirm(true)}>Delete</button>
+            <button
+              className={s.delete}
+              onClick={() => setShowDeleteConfirm(true)}
+            >
+              Delete
+            </button>
           </div>
         </div>
       </div>
@@ -72,11 +89,11 @@ const TransactionsItem = ({ transaction, index }) => {
           </div>
           <div className={s.mobileField}>
             <span className={s.fieldName}>Type</span>
-            <span className={s.fieldValue}>{type}</span>
+            <span className={s.fieldValue}>{category.type === 'income' ? '+' : '-'}</span>
           </div>
           <div className={s.mobileField}>
             <span className={s.fieldName}>Category</span>
-            <span className={s.fieldValue}>{category}</span>
+            <span className={s.fieldValue}>{category.name}</span>
           </div>
           <div className={s.mobileField}>
             <span className={s.fieldName}>Comment</span>
@@ -84,20 +101,29 @@ const TransactionsItem = ({ transaction, index }) => {
           </div>
           <div className={s.mobileField}>
             <span className={s.fieldName}>Sum</span>
-            <span className={`${s.fieldValue} ${type === "+" ? s.sumPositive : s.sumNegative}`}>
-              {sum.toLocaleString()}
+            <span
+              className={`${s.fieldValue} ${
+                category.type === 'income' ? s.sumPositive : s.sumNegative
+              }`}
+            >
+              {amount.toLocaleString()}
             </span>
           </div>
           <div className={s.actions}>
             <div className={s.svgButton}>
-              <svg className={s.svgEdit} width="14" height="14" >
-                <use href="/icons.svg#edit"></use>
+              <svg className={s.svgEdit} width='14' height='14'>
+                <use href='/icons.svg#edit'></use>
               </svg>
-              <button className={s.delete} onClick={() => setShowDeleteConfirm(true)}>Delete</button>
+              <button
+                className={s.delete}
+                onClick={() => setShowDeleteConfirm(true)}
+              >
+                Delete
+              </button>
             </div>
             <button className={s.edit} onClick={() => setShowEdit(true)}>
-              <svg className={s.svgEditIcon} width="14" height="14" >
-                <use href="/icons.svg#edit"></use>
+              <svg className={s.svgEditIcon} width='14' height='14'>
+                <use href='/icons.svg#edit'></use>
               </svg>
               <span className={s.label}>Edit</span>
             </button>
