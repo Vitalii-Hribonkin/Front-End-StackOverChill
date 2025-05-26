@@ -116,20 +116,15 @@
     .transactionWrapper {
         border-radius: 16px;
         padding: 4px;
-        margin-left: 16px;
-        margin-right: 16px;
+        margin-right: 10px;
     }
 
     .transactionTableRow {
-        height: auto;
-        width: 100%;
-        display: grid;
-        grid-template-columns: 1fr 0.5fr 1fr 1fr 1fr 1fr;
-        align-items: start;
-        font-weight: 400;
-        font-size: 14px;
-        overflow: visible;
-    }
+    display: grid;
+    grid-template-columns: 1fr 0.4fr 1fr 2fr 1fr 0.8fr;
+    align-items: start;
+    font-size: 14px;
+  }
 
     .transactionCard {
         display: none;
@@ -236,8 +231,7 @@
     .transactionWrapper {
         border-radius: 16px;
         padding: 4px;
-        margin-left: 16px;
-        margin-right: 16px;
+        margin-right: 10px;
     }
 
     .transactionTableRow {
