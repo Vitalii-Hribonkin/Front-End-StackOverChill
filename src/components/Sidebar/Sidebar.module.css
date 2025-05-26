@@ -23,6 +23,8 @@
   .sidebar {
     flex-direction: column;
     max-width: 451px;
+    padding: 0;
+    justify-content: unset;
   }
   .wrapper {
     margin-top: 24px;

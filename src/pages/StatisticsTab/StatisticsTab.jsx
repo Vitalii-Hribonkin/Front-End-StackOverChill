@@ -10,9 +10,7 @@ const StatisticsTab = () => {
         <Toggle />
         <Chart />
       </div>
-      <div>
         <StatisticsDashboard />
-      </div>
     </div>
   );
 };
