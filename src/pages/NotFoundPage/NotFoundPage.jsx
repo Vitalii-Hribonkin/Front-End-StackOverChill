@@ -1,17 +1,17 @@
 import { NavLink } from 'react-router-dom';
 import s from './NotFoundPage.module.css';
 
-// Десктоп
-import cat2x from '../../assets/images/notFoundPage/cat_2x.png';
-import cat1x from '../../assets/images/notFoundPage/cat_1x.png';
+// Mobile
+import catMobile1x from '../../assets/images/notFoundPage/cat_mobile_1x.webp';
+import catMobile2x from '../../assets/images/notFoundPage/cat_mobile_2x.webp';
 
-// Планшет
-import catTablet2x from '../../assets/images/notFoundPage/cat_tablet_2x.png';
-import catTablet1x from '../../assets/images/notFoundPage/cat_tablet_1x.png';
+// Tablet
+import catTablet1x from '../../assets/images/notFoundPage/cat_tablet_1x.webp';
+import catTablet2x from '../../assets/images/notFoundPage/cat_tablet_2x.webp';
 
-// Мобілка
-import catMobile2x from '../../assets/images/notFoundPage/cat_mobile_2x.png';
-import catMobile1x from '../../assets/images/notFoundPage/cat_mobile_1x.png';
+// Desktop
+import cat1x from '../../assets/images/notFoundPage/cat_1x.webp';
+import cat2x from '../../assets/images/notFoundPage/cat_2x.webp';
 
 const NotFoundPage = () => {
   return (
@@ -34,16 +34,24 @@ const NotFoundPage = () => {
             <source
               srcSet={`${catMobile1x} 1x, ${catMobile2x} 2x`}
               media="(max-width: 767px)"
+              type="image/webp"
             />
             <source
               srcSet={`${catTablet1x} 1x, ${catTablet2x} 2x`}
               media="(max-width: 1279px)"
+              type="image/webp"
             />
             <source
               srcSet={`${cat1x} 1x, ${cat2x} 2x`}
               media="(min-width: 1280px)"
+              type="image/webp"
             />
-            <img src={cat2x} alt="Окак" className={s.cat_image} />
+            <img
+              src={catMobile1x}
+              alt="Окак"
+              className={s.cat_image}
+              loading="eager"
+            />
           </picture>
           <p className={s.caption}>ОКАК</p>
         </div>
@@ -53,4 +61,3 @@ const NotFoundPage = () => {
 };
 
 export default NotFoundPage;
- 
