@@ -14,27 +14,17 @@ import { toggleIsIncome } from '../../../redux/categories/categoriesSlice';
 import { fetchCategories } from '../../../redux/categories/categoriesOperations';
 import clsx from 'clsx';
 import { createTransaction } from '../../../redux/transactions/transactionsOperations';
-import {
-  selectError,
-  selectIsLoading,
-} from '../../../redux/transactions/transactionsSelectors';
+
 
 const AddTransactionForm = ({ onClose }) => {
   const dispatch = useDispatch();
   const categories = useSelector(selectCategories);
   const isIncome = useSelector(selectIsIncome);
-  const error = useSelector(selectError);
-  const isLoading = useSelector(selectIsLoading);
 
-  // useEffect(() => {
-  //   dispatch(fetchCategories(isIncome));
-  // }, [dispatch, isIncome]);
+  useEffect(() => {
+    dispatch(fetchCategories(isIncome));
+  }, [dispatch, isIncome]);
 
-  const handleToggle = () => {
-    const newIsIncome = !isIncome;
-    dispatch(toggleIsIncome());
-    dispatch(fetchCategories(newIsIncome));
-  };
 
   const initialValues = {
     date: new Date(),
@@ -60,12 +50,12 @@ const AddTransactionForm = ({ onClose }) => {
 
 
     const transactionData = {
-      ...values,
       date: formatDate(values.date),
       amount: Number(values.amount),
       categoryId: category && category._id,
-      
     };
+
+    if (values.comment) transactionData.comment = values.comment;
 
     console.log('Submitted data:', transactionData);
     dispatch(createTransaction({ transactionData, category: { name: category.name, type: category.type } }))
@@ -74,7 +64,7 @@ const AddTransactionForm = ({ onClose }) => {
         onClose();
       })
       .catch((err) => {
-        console.error('Помилка при створенні транзакції:', err);
+        console.error(err);
       });
   };
 
@@ -102,7 +92,11 @@ const AddTransactionForm = ({ onClose }) => {
   return (
     <>
       <p className={s.title}>Add transaction</p>
-      <TypeButton onClick={handleToggle} income={isIncome} isEdit={false} />
+      <TypeButton
+        onClick={() => dispatch(toggleIsIncome())}
+        income={isIncome}
+        isEdit={false}
+      />
 
       <Formik
         initialValues={initialValues}

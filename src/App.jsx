@@ -11,10 +11,11 @@ import Loader from './components/Loader/Loader';
 import LoginPage from './pages/LoginPage/LoginPage';
 import RegistrationPage from './pages/RegistrationPage/RegistrationPage';
 import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
-import UserAcountLayout from './components/UserAcountLayout';
+import UserAcountLayout from './components/UserAcountLayout/UserAcountLayout';
 
 import { refreshUser } from './redux/auth/authOperations';
 import { setLoading } from './redux/globalSlice';
+
 
 const HomeTab = lazy(() => import('./pages/HomeTab/HomeTab'));
 const StatisticsTab = lazy(() => import('./pages/StatisticsTab/StatisticsTab'));

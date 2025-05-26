@@ -18,7 +18,6 @@ import { fetchCategories } from '../../../redux/categories/categoriesOperations'
 import clsx from 'clsx';
 import { editTransaction } from '../../../redux/transactions/transactionsOperations';
 
-
 const EditTransactionForm = ({ transaction, onClose }) => {
   const dispatch = useDispatch();
   const categories = useSelector(selectCategories);
@@ -32,12 +31,6 @@ const EditTransactionForm = ({ transaction, onClose }) => {
     dispatch(setIsIncome(incomeFlag));
     dispatch(fetchCategories(incomeFlag));
   }, [dispatch, category]);
-
-  const handleToggle = () => {
-    const newIsIncome = !isIncome;
-    dispatch(toggleIsIncome());
-    dispatch(fetchCategories(newIsIncome));
-  };
 
   const initialValues = {
     date,
@@ -80,8 +73,14 @@ const EditTransactionForm = ({ transaction, onClose }) => {
         categoryId: data.categoryId,
         amount: data.amount,
       }),
-    );
-    onClose();
+    )
+      .unwrap()
+      .then(() => {
+        onClose();
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   };
 
   const FeedbackSchema = Yup.object().shape({
@@ -108,7 +107,7 @@ const EditTransactionForm = ({ transaction, onClose }) => {
   return (
     <>
       <p className={s.title}>Edit transaction</p>
-      <TypeButton onClick={handleToggle} income={isIncome} isEdit={true} />
+      <TypeButton onClick={null} income={isIncome} isEdit={true} />
 
       <Formik
         onSubmit={handleSubmit}

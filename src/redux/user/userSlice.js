@@ -22,7 +22,7 @@ const userSlice = createSlice({
       .addCase(getUser.fulfilled, (state, action) => {
         state.userInfo.name = action.payload.name;
         state.userInfo.email = action.payload.email;
-        state.userInfo.balance = action.payload.balance;
+        state.userInfo.balance = Number(action.payload.balance);
         state.isLoading = false;
       })
       .addCase(getUser.pending, (state, action) => {
