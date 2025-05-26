@@ -1,0 +1,38 @@
+/* .chartContainer {
+  width: 288px;
+  height: 288px;
+  position: relative;
+  border-radius: 50%;
+}
+
+.centerText {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 18px;
+  font-weight: bold;
+  color: white;
+} */
+
+.chartContainer {
+  position: relative;
+  width: 288px;
+  height: 288px;
+}
+
+.chartSvg {
+  width: 100%;
+  height: 100%;
+}
+
+.centerText {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-weight: 600;
+  font-size: 18px;
+  color: white;
+  text-align: center;
+}

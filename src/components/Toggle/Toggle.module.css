@@ -1,0 +1,73 @@
+.toggleGroup {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 32px;
+}
+
+.span {
+  font-weight: 600;
+  font-size: 16px;
+  text-align: right;
+  color: var(--main-black);
+  padding: 10px 20px;
+}
+
+.toggle {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 40px;
+}
+
+.toggleInput {
+  height: 0;
+  width: 0;
+  opacity: 0;
+}
+
+.toggleSlider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: white;
+  border-radius: 30px;
+  transition: background-color 0.4s;
+}
+
+.toggleSlider::before {
+  content: "";
+  background-image: url("./../../assets/images/stat/+.svg");
+  background-size: 20px 20px;
+  background-repeat: no-repeat;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  left: -4px;
+  bottom: -2px;
+  height: 44px;
+  width: 44px;
+  background-color: var(--bg-dfad3f);
+  border-radius: 30px;
+  transition: transform 0.3s, background-color 0.3s;
+}
+
+.toggleInput:focus + .toggleSlider {
+  box-shadow: 0 0 1px #333;
+}
+
+.toggleInput:checked + .toggleSlider {
+  background-color: var(--bg-fcfcfc);
+}
+
+.toggleInput:checked + .toggleSlider::before {
+  content: "";
+  background-image: url("./../../assets/images/stat/-.svg");
+  transform: translateX(40px);
+  background-color: var(--bg-b20202);
+}
