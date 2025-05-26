@@ -1,11 +1,9 @@
 import { useDispatch } from "react-redux";
 import { toggleIsIncome } from "../../redux/statistics/statisticsSlice";
 import s from "./Toggle.module.css";
-import { useState } from "react";
 
 const Toggle = () => {
   const dispatch = useDispatch();
-  // const [values, setFieldValue] = useState("income");
   return (
     <div className={s.toggleGroup}>
       <span className={s.span}>Income</span>
