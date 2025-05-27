@@ -19,6 +19,7 @@ import statisticsReducer from './statistics/statisticsSlice';
 import currencyReducer from './currency/currencySlice';
 import globalReducer from './globalSlice'; 
 import categoriesReducer from './categories/categoriesSlice';
+import loadingMiddleware from './loadingMiddleware';
 
 
 // Налаштування persist тільки для auth (з токеном)
@@ -52,7 +53,7 @@ export const store = configureStore({
         serializableCheck: {
           ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
         },
-      }),
+      }).concat(loadingMiddleware),
     devTools: import.meta.env.DEV,
   });
 
