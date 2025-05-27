@@ -1,10 +1,19 @@
-import React from 'react'
-import Currency from '../../components/Currency/Currency'
+
+import Currency from '../../components/Currency/Currency';
+import { useMediaQuery } from 'react-responsive';
+import { Navigate } from 'react-router';
 
 const CurrencyTab = () => {
-  return (
-    <Currency/>
-  )
-}
+  const isTab = useMediaQuery({
+    query: '(min-width: 768px)',
+  });
 
-export default CurrencyTab
+
+   if (isTab) {
+     return <Navigate to='/' replace />;
+   }
+
+  return <Currency />;
+};
+
+export default CurrencyTab;
